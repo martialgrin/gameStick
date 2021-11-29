@@ -1,4 +1,4 @@
-import { calcAtan, map, calcSin, calcHypotenus } from "../Utils";
+import { calcAtan } from "../Utils";
 import stick from "./Stick";
 import PARAMS from "../PARAMS";
 import { PartsViewed } from "./Parts";
@@ -15,11 +15,11 @@ class Grid {
     this.canvas.style.height = this.h / this.pixelDensity + "px";
     this.ctx = PARAMS.canvas.ctx;
     this.lineWidth = PARAMS.stick.lineWidth;
-    this.nbBallsGrid = 20;
-    this.init();
+    this.nbBallsGrid = PARAMS.grid.nbBallsOnWidth;
     this.PartsToDisplay = [];
     this.level = PARAMS.game.initialLevel;
     this.space = this.w / this.nbBallsGrid;
+    this.init();
   }
 
   init() {
@@ -42,19 +42,22 @@ class Grid {
     if (e.code == "Digit" + e.key) {
       this.level = e.key;
     }
-    console.log(this.level);
+    console.log("Level Selected: " + this.level);
   }
 
-  // DEpuis ML5 on pose
+  // Depuis ML5 ON Pose
 
   getData(datas) {
     this.PartsToDisplay = PartsViewed(datas, this.level - 1);
-    this.drawGrid();
-    // console.log("ok");
+    this.draw();
   }
 
-  drawGrid() {
+  draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawGrid();
+    this.drawStick();
+  }
+  drawGrid() {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {
         this.ctx.beginPath();
@@ -64,6 +67,8 @@ class Grid {
         this.ctx.closePath();
       }
     }
+  }
+  drawStick() {
     this.ctx.beginPath();
     this.ctx.lineCap = "round";
     stick(this.ctx, this.PartsToDisplay, this.w, this.h);

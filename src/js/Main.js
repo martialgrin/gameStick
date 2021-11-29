@@ -1,8 +1,5 @@
 import * as CANVAS from "./DomElements/CreateCanvas";
 import * as WEBCAM from "./DomElements/CreateWebcam";
-import CreateScene from "./THREE/CreateScene";
-import StickMan from "./Canvas/StickMan";
-import Grid from "./Canvas/Grid";
 import * as POSNET from "./ML5/PosNet";
 import { ElementIsLoading } from "./Utils";
 import PARAMS from "./PARAMS";

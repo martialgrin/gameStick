@@ -1,12 +1,14 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: false,
+    videoStream: true,
   },
   game: {
     initialLevel: 1,
   },
-
+  grid: {
+    nbBallsOnWidth: 20,
+  },
   stick: {
     lineWidth: 300,
   },
@@ -23,28 +25,12 @@ const PARAMS = {
     videoIsReady: false,
     obj: null,
   },
-  three: {
-    scene: {
-      cam: {
-        left: -1,
-        right: 1,
-        top: 1,
-        bottom: -1,
-        near: -1,
-        far: 1,
-      },
-    },
-  },
   poseNet: {
     isLoaded: false,
     poses: {
       key: null,
       someoneIsFront: false,
     },
-  },
-
-  stickMan: {
-    headSize: null,
   },
 };
 
