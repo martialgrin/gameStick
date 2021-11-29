@@ -1,0 +1,17 @@
+@use "abstracts" as *;
+
+canvas {
+  filter: brightness(115%) grayscale(100%) contrast(5000%);
+  position: fixed;
+  z-index: 1;
+  // filter: blur(7px);
+}
+
+video {
+  object-fit: fill;
+
+  object-position: 50% 50%;
+
+  z-index: 0;
+  position: absolute;
+}

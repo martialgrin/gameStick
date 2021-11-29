@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "RBold";
+  src: url("../fonts/RiformaLL-Bold.otf") format("otf");
+  src: url("../fonts/RiformaLL-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RMedium";
+  src: url("../fonts/RiformaLL-Medium.otf") format("otf");
+  src: url("../fonts/RiformaLL-Medium.woff") format("woff");
+}
+
+* {
+  font-family: "RMedium";
+}
