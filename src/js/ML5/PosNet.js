@@ -18,11 +18,9 @@ const modelLoaded = () => {
       for (let i = 0; i < pos.length; i++) {
         pos[i].position = normalizeValue(pos[i].position);
       }
-      // console.log(pos);
       PARAMS.poseNet.someoneIsFront = true;
       // POSES.key = results[0].pose.keypoints;
       app.getData(results[0].pose.keypoints);
-      // responsiveValue(results[0].pose.keypoints);
       PARAMS.poseNet.isLoaded = true;
     } else {
       PARAMS.poseNet.someoneIsFront = false;

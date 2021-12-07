@@ -10,7 +10,7 @@ const PARAMS = {
     nbBallsOnWidth: 20,
   },
   stick: {
-    lineWidth: 300,
+    lineWidth: 60,
   },
   canvas: {
     id: "main-container",

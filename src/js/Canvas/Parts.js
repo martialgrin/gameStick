@@ -1,3 +1,6 @@
+/******* MODULE TO CREATE AN ARRAY ONLY FOR VIEWS PARTS *********/
+/******* STATE -- FINISHED*********/
+
 import { difference } from "../Utils";
 import LEVELS from "../LEVELS";
 

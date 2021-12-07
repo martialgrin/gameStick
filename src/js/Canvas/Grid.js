@@ -6,9 +6,7 @@ import { PartsViewed } from "./Parts";
 class Grid {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
-
     this.pixelDensity = window.devicePixelRatio;
-    console.log(this.pixelDensity);
     this.canvas.width = this.w = window.innerWidth * this.pixelDensity;
     this.canvas.height = this.h = window.innerHeight * this.pixelDensity;
     this.canvas.style.width = this.w / this.pixelDensity + "px";
@@ -61,7 +59,7 @@ class Grid {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {
         this.ctx.beginPath();
-        this.ctx.arc(x, y, 30, 0, 2 * Math.PI);
+        this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
         this.ctx.fill();
         this.ctx.fillStyle = "#000";
         this.ctx.closePath();
