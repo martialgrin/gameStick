@@ -1,7 +1,8 @@
-import { calcAtan } from "../Utils";
+import { calcAtan, calcRadian, radianToDegree } from "../Utils";
 import PARAMS from "../PARAMS";
-import { PartsViewed } from "./Parts";
+import { AngleBetweenElements, PartsViewed } from "./Parts";
 import Stick from "./Stick";
+import DrawStick from "./drawStick";
 
 class Grid {
   constructor() {
@@ -24,8 +25,7 @@ class Grid {
   }
 
   init() {
-    console.log(calcAtan(0, 0, 3, 4));
-    this.Stick = new Stick(this.ctx, this.PartsToDisplay);
+    this.Stick = new DrawStick(this.ctx, this.PartsToDisplay);
     this.checkIfModelIsLoaded();
   }
   checkIfModelIsLoaded() {
@@ -47,11 +47,23 @@ class Grid {
     console.log("Level Selected: " + this.level);
   }
 
-  // Depuis ML5 ON Pose
-
+  // Depuis ML5 OnPose
   getData(datas) {
     this.PartsToDisplay = PartsViewed(datas, this.level - 1);
+    this.ElementsParts = AngleBetweenElements(datas, this.level - 1);
+    this.calcAngleForLine();
     this.draw();
+  }
+
+  calcAngleForLine() {
+    const array = [];
+    for (let i = 0; i < this.ElementsParts.length; i++) {
+      const start = this.ElementsParts[i][0].position;
+      const end = this.ElementsParts[i][1].position;
+      const angle = calcRadian(start.x, start.y, end.x, end.y);
+      array.push(angle);
+    }
+    this.arrayElements = array;
   }
 
   draw() {
@@ -73,7 +85,7 @@ class Grid {
   drawStick() {
     this.ctx.beginPath();
     this.ctx.lineCap = "round";
-    this.Stick.draw(this.PartsToDisplay);
+    this.Stick.draw(this.arrayElements);
     // stick(this.ctx, this.PartsToDisplay);
     this.ctx.stroke();
     this.ctx.lineWidth = this.lineWidth;

@@ -3,9 +3,7 @@
 
 import { difference } from "../Utils";
 import LEVELS from "../LEVELS";
-
-// Tronc position fixe ou pieds
-// Chaque élement à un angle variable mais une longueur fixe
+import NEWLEVELS from "../NEWLEVELS";
 
 const PartsViewed = (datas, id) => {
   const array = [];
@@ -33,4 +31,32 @@ const PartsViewed = (datas, id) => {
   return array;
 };
 
-export { PartsViewed };
+const AngleBetweenElements = (datas, id) => {
+  const array = [];
+  for (let i = 0; i < NEWLEVELS[id].body.length; i++) {
+    const body = NEWLEVELS[id].body[i];
+    const element = [];
+    element.push(DefinePoint(body.start, datas));
+    element.push(DefinePoint(body.end, datas));
+    array.push(element);
+  }
+  return array;
+};
+
+// To create an object with only 1 x and 1 y
+const DefinePoint = (elem, datas) => {
+  let point;
+  if (typeof elem == "object") {
+    point = {
+      position: {
+        x: difference(datas[elem[0]].position.x, datas[elem[1]].position.x),
+        y: difference(datas[elem[0]].position.y, datas[elem[1]].position.y),
+      },
+    };
+  } else {
+    point = datas[elem];
+  }
+  return point;
+};
+
+export { AngleBetweenElements, PartsViewed };

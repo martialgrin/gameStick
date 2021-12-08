@@ -33,6 +33,10 @@ const calcRadian = (x1, y1, x2, y2) => {
   return h;
 };
 
+const radianToDegree = (val) => {
+  return (val * 180) / Math.PI;
+};
+
 const calcHypotenus = (x, y) => {
   return Math.sqrt(x * x + y * y);
 };
@@ -41,6 +45,7 @@ const calcSin = (opp1, opp2, hyp) => {
 };
 
 export {
+  radianToDegree,
   calcRadian,
   calcAtan,
   difference,
