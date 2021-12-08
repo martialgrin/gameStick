@@ -20,8 +20,8 @@ const PARAMS = {
     height: null,
   },
   video: {
-    width: 270, //0 for window width - it will be the same size for the canvas
-    height: 480, //0 for window height - it will be the same size for the canvas
+    width: 640, //270-Screen MID - 0 for window width - it will be the same size for the canvas
+    height: 480, //480-Screen MID - 0 for window height - it will be the same size for the canvas
     videoIsReady: false,
     obj: null,
   },

@@ -8,14 +8,14 @@ const LEVELS = [
         parts: 0,
       },
       {
-        name: "shoulder",
-        difference: true,
-        parts: [6, 5],
-      },
-      {
-        name: "hip",
+        name: "Hip",
         difference: true,
         parts: [11, 12],
+      },
+      {
+        name: "Ankle",
+        difference: true,
+        parts: [15, 16],
       },
     ],
   },
@@ -36,6 +36,26 @@ const LEVELS = [
         name: "leftWrist",
         difference: false,
         parts: 10,
+      },
+    ],
+  },
+  {
+    id: 3,
+    body: [
+      {
+        name: "nose",
+        difference: false,
+        parts: 0,
+      },
+      {
+        name: "shoulder",
+        difference: true,
+        parts: [6, 5],
+      },
+      {
+        name: "hip",
+        difference: true,
+        parts: [11, 12],
       },
     ],
   },

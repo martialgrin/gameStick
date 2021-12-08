@@ -7,19 +7,59 @@
 
 // Heading
 
-const stick = (ctx, datas, width, height) => {
-  for (let i = 0; i < datas.length; i++) {
-    if (i == 0) {
-      ctx.moveTo(0.5 * width, 0.5 * height);
-      ctx.lineTo(datas[i].position.x * width, datas[i].position.y * height);
-    } else {
-      ctx.moveTo(
-        datas[i - 1].position.x * width,
-        datas[i - 1].position.y * height
+import { calcRadian } from "../Utils";
+
+import PARAMS from "../PARAMS";
+
+class Stick {
+  constructor(ctx) {
+    this.width = PARAMS.canvas.width;
+    this.height = PARAMS.canvas.height;
+    this.arrayRadian = [];
+    this.ctx = ctx;
+  }
+
+  draw(datas) {
+    this.datas = datas;
+    this.drawStartingPoint();
+    for (let i = 0; i + 1 < datas.length; i++) {
+      this.arrayPos = i;
+      this.radian = calcRadian(
+        this.datas[i].position.x,
+        this.datas[i].position.y,
+        this.datas[i + 1].position.x,
+        this.datas[i + 1].position.y
       );
-      ctx.lineTo(datas[i].position.x * width, datas[i].position.y * height);
+      this.arrayRadian.push(this.radian);
+      if (i == 0) {
+        // console.log((this.radian * 180) / Math.PI);
+      }
+      this.drawLine();
+    }
+    this.restorePath();
+    this.ctx.restore();
+  }
+
+  drawStartingPoint() {
+    this.ctx.save();
+    this.ctx.translate(0.5 * this.width, 0.5 * this.height);
+    this.ctx.moveTo(0, 0);
+  }
+
+  drawLine() {
+    this.ctx.save();
+    this.ctx.rotate(this.radian - this.arrayRadian[0]);
+    if (this.arrayPos == 1) {
+      this.ctx.lineTo(0, 0.4 * this.height);
+    } else {
+      this.ctx.lineTo(0, 0.2 * this.height);
     }
   }
-};
+  restorePath() {
+    for (let i = 0; i < this.datas.length - 1; i++) {
+      this.ctx.restore();
+    }
+  }
+}
 
-export default stick;
+export default Stick;

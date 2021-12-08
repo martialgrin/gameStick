@@ -26,6 +26,13 @@ const calcAtan = (x1, y1, x2, y2) => {
   return Math.atan(opp / adj);
 };
 
+const calcRadian = (x1, y1, x2, y2) => {
+  const x = x2 - x1;
+  const y = y2 - y1;
+  const h = Math.atan2(y, x);
+  return h;
+};
+
 const calcHypotenus = (x, y) => {
   return Math.sqrt(x * x + y * y);
 };
@@ -33,4 +40,12 @@ const calcSin = (opp1, opp2, hyp) => {
   return Math.asin(Math.abs(opp2 - opp1) / hyp);
 };
 
-export { calcAtan, difference, map, calcSin, calcHypotenus, ElementIsLoading };
+export {
+  calcRadian,
+  calcAtan,
+  difference,
+  map,
+  calcSin,
+  calcHypotenus,
+  ElementIsLoading,
+};

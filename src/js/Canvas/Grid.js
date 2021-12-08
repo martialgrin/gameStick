@@ -1,7 +1,7 @@
 import { calcAtan } from "../Utils";
-import stick from "./Stick";
 import PARAMS from "../PARAMS";
 import { PartsViewed } from "./Parts";
+import Stick from "./Stick";
 
 class Grid {
   constructor() {
@@ -9,6 +9,9 @@ class Grid {
     this.pixelDensity = window.devicePixelRatio;
     this.canvas.width = this.w = window.innerWidth * this.pixelDensity;
     this.canvas.height = this.h = window.innerHeight * this.pixelDensity;
+
+    PARAMS.canvas.width = this.w;
+    PARAMS.canvas.height = this.h;
     this.canvas.style.width = this.w / this.pixelDensity + "px";
     this.canvas.style.height = this.h / this.pixelDensity + "px";
     this.ctx = PARAMS.canvas.ctx;
@@ -22,6 +25,7 @@ class Grid {
 
   init() {
     console.log(calcAtan(0, 0, 3, 4));
+    this.Stick = new Stick(this.ctx, this.PartsToDisplay);
     this.checkIfModelIsLoaded();
   }
   checkIfModelIsLoaded() {
@@ -59,7 +63,7 @@ class Grid {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {
         this.ctx.beginPath();
-        this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
+        // this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
         this.ctx.fill();
         this.ctx.fillStyle = "#000";
         this.ctx.closePath();
@@ -69,7 +73,8 @@ class Grid {
   drawStick() {
     this.ctx.beginPath();
     this.ctx.lineCap = "round";
-    stick(this.ctx, this.PartsToDisplay, this.w, this.h);
+    this.Stick.draw(this.PartsToDisplay);
+    // stick(this.ctx, this.PartsToDisplay);
     this.ctx.stroke();
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.closePath();
