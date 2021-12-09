@@ -2,7 +2,7 @@ import { calcAtan, calcRadian, radianToDegree } from "../Utils";
 import PARAMS from "../PARAMS";
 import { AngleBetweenElements, PartsViewed } from "./Parts";
 import Stick from "./Stick";
-import DrawStick from "./drawStick";
+import DrawStick from "./DrawStick";
 
 class Grid {
   constructor() {

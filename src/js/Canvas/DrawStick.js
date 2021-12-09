@@ -21,8 +21,8 @@ class DrawStick {
   draw(angles) {
     this.angles = angles;
     this.drawStartingPoint();
-    for (let i = 0; i < this.angles.length; i++) {
-      this.drawLine(this.angles[i]);
+    for (let i = 0; i < this.angles.length - 1; i++) {
+      this.drawLine(this.angles[i], this.angles[i + 1]);
     }
     this.restorePath();
     this.ctx.restore();
@@ -34,13 +34,13 @@ class DrawStick {
     this.ctx.moveTo(0, 0);
   }
 
-  drawLine(angle) {
+  drawLine(angle, nextAngle) {
     this.ctx.save();
     this.ctx.rotate(angle);
     this.ctx.lineTo(0, 0.2 * this.height);
   }
   restorePath() {
-    for (let i = 0; i < this.angles.length - 1; i++) {
+    for (let i = 0; i < this.angles.length; i++) {
       this.ctx.restore();
     }
   }
