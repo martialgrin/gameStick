@@ -82,6 +82,8 @@ class Grid {
       }
     }
   }
+
+  // Test Pour Loris
   drawStick() {
     this.ctx.beginPath();
     this.ctx.lineCap = "round";
