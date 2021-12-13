@@ -52,6 +52,7 @@ class App {
 
   initListeners() {
     document.addEventListener("keyup", this.selectLevel.bind(this));
+    this.draw();
   }
 
   selectLevel(e) {
@@ -61,11 +62,8 @@ class App {
     console.log("Level Selected: " + this.level);
   }
 
-  // Récupére les datas de posnet pour initaliser le draw
   getData(datas) {
     this.ElementsParts = AngleBetweenElements(datas, this.level - 1);
-    this.calcAngleForLine();
-    this.draw();
   }
 
   calcAngleForLine() {
@@ -88,10 +86,12 @@ class App {
     if (PARAMS.dev.state != true) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+    this.calcAngleForLine();
     this.checkLevel();
     this.drawTarget();
     this.drawGrid();
     this.drawStick();
+    requestAnimationFrame(this.draw.bind(this));
   }
 
   checkLevel() {
@@ -105,6 +105,7 @@ class App {
       console.log("Yeah");
     }
   }
+
   drawGrid() {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {

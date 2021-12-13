@@ -6,12 +6,12 @@ import { normalizeValue } from "./changeValue";
 
 let poseNet;
 
-const LoadModel = () => {
-  poseNet = ml5.poseNet(PARAMS.video.obj, modelLoaded.bind(this));
+const LoadModel = (canvasApp) => {
+  poseNet = ml5.poseNet(PARAMS.video.obj, modelLoaded.bind(this, canvasApp));
 };
 
-const modelLoaded = () => {
-  const Game = new App();
+const modelLoaded = (canvasApp) => {
+  const Game = canvasApp;
   poseNet.on("pose", (results) => {
     if (results.length > 0) {
       let pos = results[0].pose.keypoints;
