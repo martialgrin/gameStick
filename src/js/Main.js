@@ -1,6 +1,7 @@
 import * as CANVAS from "./DomElements/CreateCanvas";
 import * as WEBCAM from "./DomElements/CreateWebcam";
 import * as POSNET from "./ML5/PosNet";
+import App from "./Canvas/App";
 import { ElementIsLoading } from "./Utils";
 import PARAMS from "./PARAMS";
 import Stats from "stats.js";
@@ -19,7 +20,8 @@ const Main = () => {
 
 const VideoIsLoaded = () => {
   CANVAS.createCanvas(PARAMS.canvas.id);
-  POSNET.LoadModel();
+  const canvasApp = new App();
+  POSNET.LoadModel(canvasApp);
   ModelML5Loaded();
 
   // CreateScene();
@@ -31,9 +33,7 @@ const statsViewer = () => {
   requestAnimationFrame(statsViewer);
 };
 
-const ModelML5Loaded = () => {
-  // new Grid();
-};
+const ModelML5Loaded = () => {};
 
 window.onload = () => {
   console.log("hello World");
