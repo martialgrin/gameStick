@@ -28,6 +28,26 @@ const LEVELS = [
         parts: 0,
       },
       {
+        name: "Hip",
+        difference: true,
+        parts: [11, 12],
+      },
+      {
+        name: "LeftWrist",
+        difference: false,
+        parts: 9,
+      },
+    ],
+  },
+  {
+    id: 2,
+    body: [
+      {
+        name: "nose",
+        difference: false,
+        parts: 0,
+      },
+      {
         name: "leftShoulder",
         difference: false,
         parts: 5,

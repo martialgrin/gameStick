@@ -1,16 +1,47 @@
 const NEWLEVELS = [
   {
-    id: 1,
+    id: 4,
+    target: [
+      { x: 0.5, y: 0.8 },
+      { x: 0.4, y: 0.5 },
+      { x: 0.4, y: 0.2 },
+    ],
     body: [
       {
-        name: "FromNoseToHip",
+        name: "FromHipToAnkle",
         start: 0,
         end: [11, 12],
       },
       {
+        name: "FromLeftElbowToWrist",
+        start: 7,
+        end: 9,
+      },
+
+      // {
+      //   name: "FromNoseToHip",
+      //   start: 0,
+      //   end: [11, 12],
+      // },
+      // {
+      //   name: "FromHipToAnkle",
+      //   start: 11,
+      //   end: 16,
+      // },
+    ],
+  },
+  {
+    id: 1,
+    body: [
+      {
         name: "FromHipToAnkle",
+        end: [11, 12],
+        start: [15, 16],
+      },
+      {
+        name: "FromNoseToHip",
+        end: 0,
         start: [11, 12],
-        end: [15, 16],
       },
     ],
   },
@@ -18,19 +49,19 @@ const NEWLEVELS = [
     id: 2,
     body: [
       {
-        name: "nose",
-        difference: false,
-        parts: 0,
+        name: "FromHipToAnkle",
+        end: [11, 12],
+        start: [15, 16],
       },
       {
-        name: "leftShoulder",
-        difference: false,
-        parts: 5,
+        name: "FromNoseToHip",
+        end: 0,
+        start: [11, 12],
       },
       {
-        name: "leftWrist",
-        difference: false,
-        parts: 10,
+        name: "FromLeftElbowToWrist",
+        start: 7,
+        end: 8,
       },
     ],
   },
@@ -38,19 +69,14 @@ const NEWLEVELS = [
     id: 3,
     body: [
       {
-        name: "nose",
-        difference: false,
-        parts: 0,
+        name: "FromLeftElblowToShoulder",
+        start: 5,
+        end: 7,
       },
       {
-        name: "shoulder",
-        difference: true,
-        parts: [6, 5],
-      },
-      {
-        name: "hip",
-        difference: true,
-        parts: [11, 12],
+        name: "FromLeftElbowToWrist",
+        end: 9,
+        start: 7,
       },
     ],
   },

@@ -15,20 +15,22 @@ const modelLoaded = () => {
   poseNet.on("pose", (results) => {
     if (results.length > 0) {
       let pos = results[0].pose.keypoints;
-      for (let i = 0; i < pos.length; i++) {
-        pos[i].position = normalizeValue(pos[i].position);
+      if (PARAMS.dev.state) {
+        protoype(pos);
       }
+      // for (let i = 0; i < pos.length; i++) {
+      //   pos[i].position = normalizeValue(pos[i].position);
+      // }
       PARAMS.poseNet.someoneIsFront = true;
       // POSES.key = results[0].pose.keypoints;
-      app.getData(results[0].pose.keypoints);
+      app.getData(pos);
       PARAMS.poseNet.isLoaded = true;
     } else {
       PARAMS.poseNet.someoneIsFront = false;
     }
-    if (PARAMS.dev.state) {
-      // protoype();
-    }
   });
 };
+
+const normalizeEachPoint = () => {};
 
 export { LoadModel };
