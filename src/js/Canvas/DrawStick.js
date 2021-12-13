@@ -31,13 +31,17 @@ class DrawStick {
 
   drawStartingPoint() {
     this.ctx.save();
-    this.ctx.translate(0.5 * this.width, 0.2 * this.height);
+    this.ctx.translate(0.5 * this.width, 0.9 * this.height);
     this.ctx.moveTo(0, 0);
   }
 
-  drawLine(angle, previousAngle) {
+  drawLine(angle) {
+    // if (PARAMS.dev.state) {
+    //   console.log(angle);
+    // }
     this.ctx.save();
     this.ctx.rotate(angle);
+    this.ctx.moveTo(0, 0);
     this.ctx.lineTo(0.3 * this.width, 0);
     this.ctx.translate(0.3 * this.width, 0);
     this.ctx.rotate(-angle);

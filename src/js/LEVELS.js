@@ -1,21 +1,56 @@
+//Two number: left -right value
+
+// 0: Nose
+// 1-2:Eye
+// 3-4: Ear
+// 5-6: Shoulder
+// 7-8: Elbow
+// 9-10: Wrist
+// 11-12: Hip
+// 13-14: Knee
+// 15-16: Ankle
+
 const LEVELS = [
+  {
+    errorMargin: 0.1,
+    id: 1,
+    targetsAngle: [-1.57, -1.2],
+    body: [
+      {
+        name: "FromLeftAnkleToHip",
+        start: 15,
+        end: [11, 12],
+      },
+      {
+        name: "FromHipToNose",
+        start: [11, 12],
+        end: 0,
+      },
+
+      // {
+      //   name: "FromNoseToHip",
+      //   start: 0,
+      //   end: [11, 12],
+      // },
+      // {
+      //   name: "FromHipToAnkle",
+      //   start: 11,
+      //   end: 16,
+      // },
+    ],
+  },
   {
     id: 1,
     body: [
       {
-        name: "nose",
-        difference: false,
-        parts: 0,
+        name: "FromHipToAnkle",
+        end: [11, 12],
+        start: [15, 16],
       },
       {
-        name: "Hip",
-        difference: true,
-        parts: [11, 12],
-      },
-      {
-        name: "Ankle",
-        difference: true,
-        parts: [15, 16],
+        name: "FromNoseToHip",
+        end: 0,
+        start: [11, 12],
       },
     ],
   },
@@ -23,39 +58,19 @@ const LEVELS = [
     id: 2,
     body: [
       {
-        name: "nose",
-        difference: false,
-        parts: 0,
+        name: "FromHipToAnkle",
+        end: [11, 12],
+        start: [15, 16],
       },
       {
-        name: "Hip",
-        difference: true,
-        parts: [11, 12],
+        name: "FromNoseToHip",
+        end: 0,
+        start: [11, 12],
       },
       {
-        name: "LeftWrist",
-        difference: false,
-        parts: 9,
-      },
-    ],
-  },
-  {
-    id: 2,
-    body: [
-      {
-        name: "nose",
-        difference: false,
-        parts: 0,
-      },
-      {
-        name: "leftShoulder",
-        difference: false,
-        parts: 5,
-      },
-      {
-        name: "leftWrist",
-        difference: false,
-        parts: 10,
+        name: "FromLeftElbowToWrist",
+        start: 7,
+        end: 8,
       },
     ],
   },
@@ -63,19 +78,14 @@ const LEVELS = [
     id: 3,
     body: [
       {
-        name: "nose",
-        difference: false,
-        parts: 0,
+        name: "FromLeftElblowToShoulder",
+        start: 5,
+        end: 7,
       },
       {
-        name: "shoulder",
-        difference: true,
-        parts: [6, 5],
-      },
-      {
-        name: "hip",
-        difference: true,
-        parts: [11, 12],
+        name: "FromLeftElbowToWrist",
+        end: 9,
+        start: 7,
       },
     ],
   },

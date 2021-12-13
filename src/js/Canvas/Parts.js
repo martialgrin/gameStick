@@ -3,7 +3,6 @@
 
 import { difference } from "../Utils";
 import LEVELS from "../LEVELS";
-import NEWLEVELS from "../NEWLEVELS";
 
 const PartsViewed = (datas, id) => {
   const array = [];
@@ -33,8 +32,8 @@ const PartsViewed = (datas, id) => {
 
 const AngleBetweenElements = (datas, id) => {
   const array = [];
-  for (let i = 0; i < NEWLEVELS[id].body.length; i++) {
-    const body = NEWLEVELS[id].body[i];
+  for (let i = 0; i < LEVELS[id].body.length; i++) {
+    const body = LEVELS[id].body[i];
     const element = [];
     element.push(DefinePoint(body.start, datas));
     element.push(DefinePoint(body.end, datas));
