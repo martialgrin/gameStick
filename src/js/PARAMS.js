@@ -1,6 +1,6 @@
 const PARAMS = {
   dev: {
-    state: false, //all Tools for Developement
+    state: true, //all Tools for Developement
     videoStream: false,
   },
   game: {

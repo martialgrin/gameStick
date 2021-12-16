@@ -5,6 +5,8 @@ import LEVELS from "../LEVELS";
 import checkPartAndTarget from "../levelLogic/checkPartAndTarget";
 import DrawStick from "./DrawStick";
 
+import { easeOutCirc } from "js-easing-functions";
+
 class App {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
@@ -38,7 +40,11 @@ class App {
     this.lineWidth = PARAMS.stick.lineWidth;
     this.posXSitckyPoint = 0;
     this.LastPosXStickyPoint = 0;
-    this.TargetLineWidth = this.lineWidth + PARAMS.targetStick.lineWidth;
+    this.target = {
+      baseLineWidth: this.lineWidth + PARAMS.targetStick.lineWidth,
+      isInsideCount: 0,
+      lineWidth: this.lineWidth + PARAMS.targetStick.lineWidth,
+    };
   }
   // Start le sketch uniquement quand le modèle de PosNet est starté
   checkIfModelIsLoaded() {
@@ -122,12 +128,17 @@ class App {
       this.level
     );
     if (this.PartsInsideTarget) {
+      this.target.isInsideCount++;
       /****************************************
        Code When You're stick is in the target
        ***************************************/
 
-      this.TargetLineWidth += 100;
+      this.target.lineWidth += 100;
       console.log("You're in the Target");
+    } else {
+      if (this.target.lineWidth > this.target.baseLineWidth) {
+        this.target.lineWidth -= 50;
+      }
     }
   }
 
@@ -146,7 +157,7 @@ class App {
     this.ctx.save();
     this.ctx.beginPath();
     this.Target.draw(LEVELS[this.level].targetsAngle, 0.5);
-    this.ctx.lineWidth = this.TargetLineWidth;
+    this.ctx.lineWidth = this.target.lineWidth;
     this.ctx.strokeStyle = "#ff0000";
     this.ctx.stroke();
     this.ctx.closePath();
