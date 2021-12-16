@@ -110,7 +110,7 @@ class App {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {
         this.ctx.beginPath();
-        this.ctx.arc(x, y, 20, 0, 2 * Math.PI);
+        this.ctx.arc(x, y, this.space / 2, 0, 2 * Math.PI);
         this.ctx.fill();
         this.ctx.fillStyle = "#000000";
         this.ctx.closePath();

@@ -7,7 +7,7 @@ const PARAMS = {
     initialLevel: 1,
   },
   grid: {
-    nbBallsOnWidth: 20,
+    nbBallsOnWidth: 60,
   },
   stick: {
     lineWidth: 400,
