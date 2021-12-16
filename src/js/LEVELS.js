@@ -34,8 +34,8 @@ const LEVELS = [
     targetsAngle: [-1.57, -1.2, 0],
     body: [
       {
-        name: "FromLeftAnkleToHip",
-        start: 15,
+        name: "FromAnkleToHip",
+        start: [15, 16],
         end: [11, 12],
       },
       {

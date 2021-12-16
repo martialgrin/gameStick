@@ -125,6 +125,7 @@ class App {
       /****************************************
        Code When You're stick is in the target
        ***************************************/
+
       this.TargetLineWidth += 100;
       console.log("You're in the Target");
     }

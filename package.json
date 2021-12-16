@@ -15,6 +15,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "js-easing-functions": "^1.0.3",
     "stats.js": "^0.17.0",
     "three": "^0.134.0"
   },
