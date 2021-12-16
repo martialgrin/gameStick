@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: true,
+    videoStream: false,
   },
   game: {
     initialLevel: 1,
@@ -10,7 +10,10 @@ const PARAMS = {
     nbBallsOnWidth: 20,
   },
   stick: {
-    lineWidth: 60,
+    lineWidth: 400,
+  },
+  targetStick: {
+    lineWidth: 100, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
@@ -20,7 +23,7 @@ const PARAMS = {
     height: null,
   },
   video: {
-    width: 640, //270-Screen MID - 0 for window width - it will be the same size for the canvas
+    width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas
     height: 480, //480-Screen MID - 0 for window height - it will be the same size for the canvas
     videoIsReady: false,
     obj: null,

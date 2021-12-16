@@ -1,3 +1,5 @@
+import { AmbientLight } from "three";
+
 const ElementIsLoading = (condition, result, debug) => {
   if (condition == true) {
     result;
@@ -9,7 +11,11 @@ const ElementIsLoading = (condition, result, debug) => {
 // Calculate difference between numbers,
 //it allows to have the center point for the hip for example
 const difference = (n1, n2) => {
-  return n1 + Math.abs(n1 - n2) / 2;
+  if (n1 < n2) {
+    return n1 + Math.abs(n1 - n2) / 2;
+  } else {
+    return n2 + Math.abs(n2 - n1) / 2;
+  }
 };
 
 const map = (n, start1, stop1, start2, stop2) => {
@@ -20,9 +26,6 @@ const map = (n, start1, stop1, start2, stop2) => {
 const calcAtan = (x1, y1, x2, y2) => {
   const adj = Math.abs(x1 - x2);
   const opp = Math.abs(y1 - y2);
-  console.log(opp, adj);
-  console.log(Math.atan(opp / adj));
-
   return Math.atan(opp / adj);
 };
 
@@ -43,8 +46,12 @@ const calcHypotenus = (x, y) => {
 const calcSin = (opp1, opp2, hyp) => {
   return Math.asin(Math.abs(opp2 - opp1) / hyp);
 };
+const lerp = (start, stop, amt) => {
+  return amt * (stop - start) + start;
+};
 
 export {
+  lerp,
   radianToDegree,
   calcRadian,
   calcAtan,
