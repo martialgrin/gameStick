@@ -162,4 +162,31 @@ class App {
   }
 }
 
+// Get Image Data to load Pixels
+
+// for (let x = 0; x < this.tiles.x; x++) {
+//   for (let y = 0; y < this.tiles.y; y++) {
+//     const posX = (x * this.w) / this.tiles.x;
+//     const posY = (y * this.h) / this.tiles.y;
+//     const pixelData = this.ctx.getImageData(posX, posY, 1, 1).data;
+//     // if (
+//     //   (x == this.thumb.x && this.thumb.y == y) ||
+//     //   (x == this.index.x && this.index.y == y)
+//     // )
+//     for (let i = 0; i < this.handArrayPos.length; i++) {
+//       if (this.handArrayPos[i][0] == x && this.handArrayPos[i][1] == y) {
+//         this.ctx.fillStyle =
+//           "rgb(" +
+//           pixelData[2] +
+//           "," +
+//           pixelData[0] +
+//           "," +
+//           pixelData[1] +
+//           ")";
+//         this.ctx.fillRect(posX, posY, this.size.w, this.size.h);
+//       }
+//     }
+//   }
+// }
+
 export default App;
