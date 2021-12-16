@@ -8,7 +8,9 @@ const PARAMS = {
   },
 
   grid: {
-    nbBallsOnWidth: 60,
+    nbBallsOnWidth: 40,
+    color1: "0,0,255",
+    color2: "0,255,0",
   },
   stick: {
     lineWidth: 400,
