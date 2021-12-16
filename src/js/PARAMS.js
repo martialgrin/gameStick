@@ -4,8 +4,9 @@ const PARAMS = {
     videoStream: false,
   },
   game: {
-    initialLevel: 1,
+    initialLevel: 2,
   },
+
   grid: {
     nbBallsOnWidth: 60,
   },

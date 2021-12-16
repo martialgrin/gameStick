@@ -26,66 +26,27 @@ const LEVELS = [
         start: [11, 12],
         end: 0,
       },
-
-      // {
-      //   name: "FromNoseToHip",
-      //   start: 0,
-      //   end: [11, 12],
-      // },
-      // {
-      //   name: "FromHipToAnkle",
-      //   start: 11,
-      //   end: 16,
-      // },
     ],
   },
   {
-    id: 1,
-    body: [
-      {
-        name: "FromHipToAnkle",
-        end: [11, 12],
-        start: [15, 16],
-      },
-      {
-        name: "FromNoseToHip",
-        end: 0,
-        start: [11, 12],
-      },
-    ],
-  },
-  {
+    errorMargin: 0.1,
     id: 2,
+    targetsAngle: [-1.57, -1.2, 0],
     body: [
       {
-        name: "FromHipToAnkle",
+        name: "FromLeftAnkleToHip",
+        start: 15,
         end: [11, 12],
-        start: [15, 16],
       },
       {
-        name: "FromNoseToHip",
-        end: 0,
+        name: "FromHipToNose",
         start: [11, 12],
+        end: 0,
       },
       {
-        name: "FromLeftElbowToWrist",
+        name: "FromLeftElblowToLeftWrist",
         start: 7,
-        end: 8,
-      },
-    ],
-  },
-  {
-    id: 3,
-    body: [
-      {
-        name: "FromLeftElblowToShoulder",
-        start: 5,
-        end: 7,
-      },
-      {
-        name: "FromLeftElbowToWrist",
         end: 9,
-        start: 7,
       },
     ],
   },
