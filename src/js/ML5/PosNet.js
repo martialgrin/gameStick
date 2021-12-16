@@ -1,8 +1,5 @@
 import PARAMS from "../PARAMS";
-import { POSES } from "./POSES";
-import App from "./../Canvas/App";
 import protoype from "./Prototyping/index";
-import { normalizeValue } from "./changeValue";
 
 let poseNet;
 

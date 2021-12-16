@@ -1,9 +1,5 @@
-// Heading
+/******** To Draw StickMan and Target*********/
 
-// Ce qu'il faut faire
-//calculer l'angle entre deux éléments, ex: tronc, bras etc.
-//les mettre ensemble
-//
 import PARAMS from "../PARAMS";
 
 class DrawStick {
@@ -15,9 +11,9 @@ class DrawStick {
     this.angles = [];
   }
   // from Drawstick with
-  draw(angles) {
+  draw(angles, startPosX) {
     this.angles = angles;
-    this.drawStartingPoint();
+    this.drawStartingPoint(startPosX);
     for (let i = 0; i < this.angles.length; i++) {
       if (i == 0) {
         this.drawLine(this.angles[i], 0);
@@ -29,9 +25,9 @@ class DrawStick {
     this.ctx.restore();
   }
 
-  drawStartingPoint() {
+  drawStartingPoint(startPosX) {
     this.ctx.save();
-    this.ctx.translate(0.5 * this.width, 0.9 * this.height);
+    this.ctx.translate(startPosX * this.width, 0.9 * this.height);
     this.ctx.moveTo(0, 0);
   }
 
