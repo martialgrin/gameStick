@@ -4,8 +4,21 @@ import { AngleBetweenElements } from "./Parts";
 import LEVELS from "../LEVELS";
 import checkPartAndTarget from "../levelLogic/checkPartAndTarget";
 import DrawStick from "./DrawStick";
+<<<<<<< Updated upstream
 
 import { easeOutCirc } from "js-easing-functions";
+=======
+import { easeElastic, elastic } from "../Utils";
+import {
+  easeOutCirc,
+  easeInOutElastic,
+  easeInOutBounce,
+} from "js-easing-functions";
+import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
+import calcAngles from "../PositionCalcs/calcAngles";
+import { animationInTarget } from "./animationTarget";
+import AnalyzePixels from "./AnalyzePixels";
+>>>>>>> Stashed changes
 
 class App {
   constructor() {
@@ -25,6 +38,7 @@ class App {
 
     this.space = this.w / this.nbBallsGrid;
     this.init();
+    this.changeLevel = false;
   }
   // Initialise le stick pours plus tard
   init() {
@@ -77,6 +91,7 @@ class App {
     this.ElementsParts = AngleBetweenElements(datas, this.level);
   }
 
+<<<<<<< Updated upstream
   calcAngleForLine() {
     this.initLastAngleArray();
     const array = [];
@@ -106,6 +121,18 @@ class App {
     this.arrayElements = array;
     // Store Last Element for the Next Frame
     this.LastAnglesArray = this.arrayElements;
+=======
+  processAngles() {
+    // console.log(this.arrayElements);
+    // console.log(this.ElementsParts);
+    this.posXSitckyPoint = calcPosStickyStartPoint(
+      this.ElementsParts[0][0].position.x
+    );
+    this.arrayElements = calcAngles(this.ElementsParts, this.changeLevel);
+    if (this.changeLevel) {
+      this.changeLevel = false;
+    }
+>>>>>>> Stashed changes
   }
 
   // Main Loop
@@ -115,6 +142,11 @@ class App {
     }
     this.calcAngleForLine();
     this.checkLevel();
+<<<<<<< Updated upstream
+=======
+    AnalyzePixels();
+    // this.drawGrid();
+>>>>>>> Stashed changes
     this.drawTarget();
     this.drawGrid();
     this.drawStick();
@@ -127,6 +159,7 @@ class App {
       LEVELS[this.level].targetsAngle,
       this.level
     );
+<<<<<<< Updated upstream
     if (this.PartsInsideTarget) {
       this.target.isInsideCount++;
       /****************************************
@@ -135,6 +168,18 @@ class App {
 
       this.target.lineWidth += 100;
       console.log("You're in the Target");
+=======
+
+    // console.log(this.arrayElements, LEVELS[this.level].targetsAngle);
+
+    if (this.PartsInsideTarget) {
+      this.target = animationInTarget(this.target);
+      if (this.target.isInsideCount == 80) {
+        this.changeLevel = true;
+        this.selectLevel(this.level + 1);
+      }
+      console.log("is Inside");
+>>>>>>> Stashed changes
     } else {
       if (this.target.lineWidth > this.target.baseLineWidth) {
         this.target.lineWidth -= 50;

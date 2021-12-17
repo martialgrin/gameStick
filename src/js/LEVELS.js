@@ -50,6 +50,36 @@ const LEVELS = [
       },
     ],
   },
+<<<<<<< Updated upstream
+=======
+  {
+    errorMargin: 0.3,
+    id: 3,
+    targetsAngle: [-1.57, -1.2, 0, -2],
+    body: [
+      {
+        name: "FromAnkleToHip",
+        start: [15, 16],
+        end: [11, 12],
+      },
+      {
+        name: "FromHipToNose",
+        start: [11, 12],
+        end: 0,
+      },
+      {
+        name: "FromLeftElblowToLeftWrist",
+        start: 7,
+        end: 9,
+      },
+      {
+        name: "FromLeftHipToLeftAnkle",
+        start: 8,
+        end: 10,
+      },
+    ],
+  },
+>>>>>>> Stashed changes
 ];
 
 export default LEVELS;
