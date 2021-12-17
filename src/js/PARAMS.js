@@ -4,7 +4,7 @@ const PARAMS = {
     videoStream: true,
   },
   game: {
-    initialLevel: 2,
+    initialLevel: 1,
   },
 
   grid: {
@@ -14,6 +14,9 @@ const PARAMS = {
   },
   stick: {
     lineWidth: 400,
+  },
+  analyze: {
+    tiles: { x: 50, y: 100 },
   },
   targetStick: {
     lineWidth: 175, // to add from the stick lineWidth
