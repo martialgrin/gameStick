@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: false,
+    videoStream: true,
   },
   game: {
     initialLevel: 2,
@@ -16,14 +16,17 @@ const PARAMS = {
     lineWidth: 400,
   },
   targetStick: {
-    lineWidth: 100, // to add from the stick lineWidth
+    lineWidth: 175, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
     obj: null,
     ctx: "2d",
-    width: null,
-    height: null,
+    width: null, // if Null define a width as window.innerWidth
+    height: null, // if Null define a width as window.innerHeight
+    analyze: {
+      tiles: { x: 50, y: 50 },
+    },
   },
   video: {
     width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas
@@ -31,6 +34,7 @@ const PARAMS = {
     videoIsReady: false,
     obj: null,
   },
+
   poseNet: {
     isLoaded: false,
     poses: {

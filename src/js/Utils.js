@@ -50,7 +50,77 @@ const lerp = (start, stop, amt) => {
   return amt * (stop - start) + start;
 };
 
+const easeElastic = (elapsed, initialValue, amountOfChange, duration) => {
+  let s = 1.70158;
+  let p = 0;
+  let a = amountOfChange;
+  if (elapsed === 0) {
+    return initialValue;
+  }
+  if ((elapsed /= duration) === 2) {
+    return initialValue + amountOfChange;
+  }
+  if (!p) {
+    // Sprin
+    p = duration * 0.3;
+  }
+  if (a < Math.abs(amountOfChange)) {
+    a = amountOfChange;
+    s = p / 4;
+  } else {
+    s = (p / (2 * Math.PI)) * Math.asin(amountOfChange / a);
+  }
+  return (
+    -(
+      a *
+      Math.pow(2, 10 * (elapsed -= 1)) *
+      Math.sin(((elapsed * duration - s) * (2 * Math.PI)) / p)
+    ) + initialValue
+  );
+};
+
+function elastic(elapsed, initialValue, amountOfChange, duration) {
+  let s = 1.70158;
+  let p = 0;
+  let a = amountOfChange;
+  if (elapsed === 0) {
+    return initialValue;
+  }
+  if ((elapsed /= duration / 2) === 2) {
+    return initialValue + amountOfChange;
+  }
+  if (!p) {
+    // Spring
+    p = duration * (0.6 * 1.5);
+  }
+  if (a < Math.abs(amountOfChange)) {
+    a = amountOfChange;
+    s = p / 4;
+  } else {
+    s = (p / (2 * Math.PI)) * Math.asin(amountOfChange / a);
+  }
+  if (elapsed < 1) {
+    return (
+      -0.5 *
+        (a *
+          Math.pow(2, 10 * (elapsed -= 1)) *
+          Math.sin(((elapsed * duration - s) * (2 * Math.PI)) / p)) +
+      initialValue
+    );
+  }
+  return (
+    a *
+      Math.pow(2, -10 * (elapsed -= 1)) *
+      Math.sin(((elapsed * duration - s) * (2 * Math.PI)) / p) *
+      0.5 +
+    amountOfChange +
+    initialValue
+  );
+}
+
 export {
+  elastic,
+  easeElastic,
   lerp,
   radianToDegree,
   calcRadian,

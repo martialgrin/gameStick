@@ -2,6 +2,8 @@ let video;
 
 import PARAMS from "../PARAMS";
 import videoManStanding from "../../images/videoManStanding.mp4";
+import level_2 from "../../images/level_2.mp4";
+
 const createContainer = () => {
   video = document.createElement("video");
   document.body.appendChild(video);
@@ -30,7 +32,7 @@ const createContainer = () => {
 
 const loadVideo = () => {
   if (PARAMS.dev.videoStream) {
-    video.src = videoManStanding;
+    video.src = level_2;
     video.muted = true;
 
     video.play();

@@ -12,13 +12,13 @@
 
 const LEVELS = [
   {
-    errorMargin: 0.1,
+    errorMargin: 0.2,
     id: 1,
     targetsAngle: [-1.57, -1.2],
     body: [
       {
         name: "FromLeftAnkleToHip",
-        start: 15,
+        start: [15, 16],
         end: [11, 12],
       },
       {
@@ -29,7 +29,7 @@ const LEVELS = [
     ],
   },
   {
-    errorMargin: 0.1,
+    errorMargin: 0.3,
     id: 2,
     targetsAngle: [-1.57, -1.2, 0],
     body: [
@@ -47,6 +47,33 @@ const LEVELS = [
         name: "FromLeftElblowToLeftWrist",
         start: 7,
         end: 9,
+      },
+    ],
+  },
+  {
+    errorMargin: 0.3,
+    id: 3,
+    targetsAngle: [-1.57, -1.2, 0, -2],
+    body: [
+      {
+        name: "FromAnkleToHip",
+        start: [15, 16],
+        end: [11, 12],
+      },
+      {
+        name: "FromHipToNose",
+        start: [11, 12],
+        end: 0,
+      },
+      {
+        name: "FromLeftElblowToLeftWrist",
+        start: 7,
+        end: 9,
+      },
+      {
+        name: "FromLeftHipToLeftAnkle",
+        start: 15,
+        end: 11,
       },
     ],
   },

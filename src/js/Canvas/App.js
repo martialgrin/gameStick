@@ -1,11 +1,18 @@
 import { map, calcRadian, lerp, radianToDegree } from "../Utils";
 import PARAMS from "../PARAMS";
-import { AngleBetweenElements } from "./Parts";
+import { preProcessArrayParts } from "../PositionCalcs/Parts";
 import LEVELS from "../LEVELS";
 import checkPartAndTarget from "../levelLogic/checkPartAndTarget";
 import DrawStick from "./DrawStick";
-
-import { easeOutCirc } from "js-easing-functions";
+import { easeElastic, elastic } from "../Utils";
+import {
+  easeOutCirc,
+  easeInOutElastic,
+  easeInOutBounce,
+} from "js-easing-functions";
+import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
+import calcAngles from "../PositionCalcs/calcAngles";
+import { animationInTarget } from "./animationTarget";
 
 class App {
   constructor() {
@@ -20,30 +27,33 @@ class App {
     this.ctx = PARAMS.canvas.ctx;
     this.nbBallsGrid = PARAMS.grid.nbBallsOnWidth;
     this.ElementsParts = [];
-    this.PartsToDisplay = [];
-    this.LastAnglesArray = [];
-
     this.space = this.w / this.nbBallsGrid;
+    this.posXSitckyPoint = 0;
     this.init();
   }
   // Initialise le stick pours plus tard
   init() {
+    if (PARAMS.dev.state) {
+      this.level = PARAMS.game.initialLevel - 1;
+    } else {
+      this.level = 0;
+    }
     this.loadBasicParamsForSketch();
-    this.Stick = new DrawStick(this.ctx, this.PartsToDisplay);
-    this.Target = new DrawStick(this.ctx, LEVELS[this.level].target);
+    this.Stick = new DrawStick(this.ctx);
+    this.Target = new DrawStick(this.ctx);
     this.checkIfModelIsLoaded();
   }
   loadBasicParamsForSketch() {
     this.ctx.lineCap = "round";
     this.ctx.lineJoin = "round";
-    this.level = PARAMS.game.initialLevel - 1;
     this.lineWidth = PARAMS.stick.lineWidth;
-    this.posXSitckyPoint = 0;
-    this.LastPosXStickyPoint = 0;
     this.target = {
+      isInside: false,
       baseLineWidth: this.lineWidth + PARAMS.targetStick.lineWidth,
       isInsideCount: 0,
+      isOutsideCount: 0,
       lineWidth: this.lineWidth + PARAMS.targetStick.lineWidth,
+      maxLineWidth: 0,
     };
   }
   // Start le sketch uniquement quand le modèle de PosNet est starté
@@ -58,54 +68,12 @@ class App {
     document.addEventListener("keyup", this.selectLevel.bind(this));
     this.draw();
   }
-  // To test if Last Element as an Array
-  initLastAngleArray() {
-    if (this.LastAnglesArray.length == 0) {
-      for (let i = 0; i < this.ElementsParts.length; i++) {
-        this.LastAnglesArray.push(0.001);
-      }
-    }
-  }
-  selectLevel(e) {
-    if (e.code == "Digit" + e.key) {
-      this.LastAnglesArray = [];
-      this.level = e.key - 1;
-    }
-    console.log("Level Selected: " + this.level + 1);
-  }
-  getData(datas) {
-    this.ElementsParts = AngleBetweenElements(datas, this.level);
-  }
 
-  calcAngleForLine() {
-    this.initLastAngleArray();
-    const array = [];
-    this.posXSitckyPoint = map(
-      this.ElementsParts[0][0].position.x,
-      0,
-      PARAMS.video.width,
-      0,
-      1
+  processAngles() {
+    this.posXSitckyPoint = calcPosStickyStartPoint(
+      this.ElementsParts[0][0].position.x
     );
-    this.posXSitckyPoint = lerp(
-      this.LastPosXStickyPoint,
-      this.posXSitckyPoint,
-      0.02
-    );
-    this.LastPosXStickyPoint = this.posXSitckyPoint;
-    for (let i = 0; i < this.ElementsParts.length; i++) {
-      const start = this.ElementsParts[i][0].position;
-      const end = this.ElementsParts[i][1].position;
-      let angle = calcRadian(start.x, start.y, end.x, end.y);
-      if (i == 0) {
-        // console.log(radianToDegree(angle));
-      }
-      angle = lerp(this.LastAnglesArray[i], angle, 0.2);
-      array.push(angle);
-    }
-    this.arrayElements = array;
-    // Store Last Element for the Next Frame
-    this.LastAnglesArray = this.arrayElements;
+    this.arrayElements = calcAngles(this.ElementsParts);
   }
 
   // Main Loop
@@ -113,10 +81,12 @@ class App {
     if (PARAMS.dev.state != true) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    this.calcAngleForLine();
+    // const counter = AnalyzePixels(this.ctx);
+    this.processAngles();
     this.checkLevel();
+
+    // this.drawGrid();
     this.drawTarget();
-    this.drawGrid();
     this.drawStick();
     requestAnimationFrame(this.draw.bind(this));
   }
@@ -127,21 +97,26 @@ class App {
       LEVELS[this.level].targetsAngle,
       this.level
     );
-    if (this.PartsInsideTarget) {
-      this.target.isInsideCount++;
-      /****************************************
-       Code When You're stick is in the target
-       ***************************************/
 
-      this.target.lineWidth += 100;
-      console.log("You're in the Target");
+    if (this.PartsInsideTarget) {
+      this.target = animationInTarget(this.target);
+      if (this.target.isInsideCount == 80) {
+        this.selectLevel(this.level + 1);
+      }
+      console.log("is Inside");
     } else {
+      if (this.target.isInside) {
+        this.target.maxLineWidth = 0;
+        this.target.isInside = false;
+        this.target.isInsideCount = 0;
+      }
+      // console.log(this.target.baseLineWidth, this.target.lineWidth);
       if (this.target.lineWidth > this.target.baseLineWidth) {
+        this.target.isOutsideCount += 2;
         this.target.lineWidth -= 50;
       }
     }
   }
-
   drawGrid() {
     for (let x = this.space; x <= this.w - this.space; x += this.space) {
       for (let y = this.space; y <= this.h - this.space; y += this.space) {
@@ -171,33 +146,24 @@ class App {
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.closePath();
   }
+  // Data recieved from ML5
+  getData(datas) {
+    this.ElementsParts = preProcessArrayParts(datas, this.level);
+  }
+  // Change Level Logic
+  selectLevel(e) {
+    if (PARAMS.dev.state) {
+      if (e.code == "Digit" + e.key) {
+        this.level = e.key - 1;
+        this.loadBasicParamsForSketch();
+      }
+    }
+    if (typeof e == "number") {
+      this.level = e;
+      this.loadBasicParamsForSketch();
+    }
+    console.log("Level Selected: " + this.level + 1);
+  }
 }
-
-// Get Image Data to load Pixels
-
-// for (let x = 0; x < this.tiles.x; x++) {
-//   for (let y = 0; y < this.tiles.y; y++) {
-//     const posX = (x * this.w) / this.tiles.x;
-//     const posY = (y * this.h) / this.tiles.y;
-//     const pixelData = this.ctx.getImageData(posX, posY, 1, 1).data;
-//     // if (
-//     //   (x == this.thumb.x && this.thumb.y == y) ||
-//     //   (x == this.index.x && this.index.y == y)
-//     // )
-//     for (let i = 0; i < this.handArrayPos.length; i++) {
-//       if (this.handArrayPos[i][0] == x && this.handArrayPos[i][1] == y) {
-//         this.ctx.fillStyle =
-//           "rgb(" +
-//           pixelData[2] +
-//           "," +
-//           pixelData[0] +
-//           "," +
-//           pixelData[1] +
-//           ")";
-//         this.ctx.fillRect(posX, posY, this.size.w, this.size.h);
-//       }
-//     }
-//   }
-// }
 
 export default App;
