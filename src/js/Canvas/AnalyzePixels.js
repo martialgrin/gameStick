@@ -12,23 +12,6 @@ const AnalyzePixels = (ctx) => {
       const pixelData = ctx.getImageData(posX, posY, 1, 1).data;
 
       array.push(pixelData);
-      // if (
-      //   (x == this.thumb.x && this.thumb.y == y) ||
-      //   (x == this.index.x && this.index.y == y)
-      //
-      //   for (let i = 0; i < this.handArrayPos.length; i++) {
-      //     if (this.handArrayPos[i][0] == x && this.handArrayPos[i][1] == y) {
-      //       this.ctx.fillStyle =
-      //         "rgb(" +
-      //         pixelData[0] +
-      //         "," +
-      //         pixelData[1] +
-      //         "," +
-      //         pixelData[2] +
-      //         ")";
-      //       this.ctx.fillRect(posX, posY, this.size.w, this.size.h);
-      //     }
-      //   }
     }
   }
   return array;
