@@ -24,17 +24,12 @@ class DrawStick {
     this.restorePath();
     this.ctx.restore();
   }
-
   drawStartingPoint(startPosX) {
     this.ctx.save();
     this.ctx.translate(startPosX * this.width, 0.9 * this.height);
     this.ctx.moveTo(0, 0);
   }
-
   drawLine(angle) {
-    // if (PARAMS.dev.state) {
-    //   console.log(angle);
-    // }
     this.ctx.save();
     this.ctx.rotate(angle);
     this.ctx.moveTo(0, 0);
