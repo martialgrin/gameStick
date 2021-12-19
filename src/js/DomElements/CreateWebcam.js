@@ -7,6 +7,9 @@ import level_2 from "../../images/level_2.mp4";
 const createContainer = () => {
   video = document.createElement("video");
   document.body.appendChild(video);
+  if (!PARAMS.dev.state) {
+    video.style.display = "none";
+  }
 
   switch (PARAMS.video.width) {
     case 0:

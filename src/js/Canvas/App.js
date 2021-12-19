@@ -62,10 +62,6 @@ class App {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));
     }
   }
-  initListeners() {
-    document.addEventListener("keyup", this.selectLevel.bind(this));
-    this.draw();
-  }
   processAngles() {
     this.posXSitckyPoint = calcPosStickyStartPoint(
       this.ElementsParts[0][0].position.x
@@ -92,6 +88,7 @@ class App {
     this.drawStick();
     requestAnimationFrame(this.draw.bind(this));
   }
+  // You Have to make change here for the check level
   checkLevel() {
     /*********************************
     Check each angles if They are In
@@ -157,6 +154,10 @@ class App {
       this.loadBasicParamsForSketch();
     }
     console.log("Level Selected: " + this.level + 1);
+  }
+  initListeners() {
+    document.addEventListener("keyup", this.selectLevel.bind(this));
+    this.draw();
   }
 }
 

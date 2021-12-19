@@ -1,8 +1,9 @@
+import PARAMS from "../PARAMS";
+
 /*********************
  Draw Sketch of Grid 
  *******************/
 
-import PARAMS from "../PARAMS";
 export default class Grid {
   constructor(ctx, w, h) {
     this.ctx = ctx;

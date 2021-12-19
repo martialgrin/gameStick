@@ -7,7 +7,6 @@ const ElementIsLoading = (condition, result, debug) => {
     requestAnimationFrame(ElementIsLoading);
   }
 };
-
 // Calculate difference between numbers,
 //it allows to have the center point for the hip for example
 const difference = (n1, n2) => {
