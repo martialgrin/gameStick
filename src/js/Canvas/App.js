@@ -6,7 +6,7 @@ import DrawStick from "./DrawStick";
 import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
 import calcAngles from "../PositionCalcs/calcAngles";
 import { animationInTarget } from "./animationTarget";
-import Grid from "./Grid";
+import Grid from "./Visual/Grid";
 import StartAnimation from "./Introduction/StartAnimation";
 
 class App {

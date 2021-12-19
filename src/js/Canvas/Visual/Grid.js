@@ -1,4 +1,4 @@
-import PARAMS from "../PARAMS";
+import PARAMS from "../../PARAMS";
 
 /*********************
  Draw Sketch of Grid 
