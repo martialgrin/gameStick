@@ -7,11 +7,12 @@ import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
 import calcAngles from "../PositionCalcs/calcAngles";
 import { animationInTarget } from "./animationTarget";
 import Grid from "./Grid";
+import StartAnimation from "./Introduction/StartAnimation";
 
 class App {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
-    this.pixelDensity = window.devicePixelRatio;
+    this.pixelDensity = 3;
     this.canvas.width = this.w = window.innerWidth * this.pixelDensity;
     this.canvas.height = this.h = window.innerHeight * this.pixelDensity;
     PARAMS.canvas.width = this.w;
@@ -21,6 +22,7 @@ class App {
     this.ctx = PARAMS.canvas.ctx;
     this.ElementsParts = [];
     this.posXSitckyPoint = 0;
+    this.stateApplication = PARAMS.game.state;
     this.init();
   }
   init() {
@@ -30,9 +32,15 @@ class App {
       this.level = 0;
     }
     this.loadBasicParamsForSketch();
-    this.Stick = new DrawStick(this.ctx);
-    this.Target = new DrawStick(this.ctx);
+    this.Stick = new DrawStick(this.ctx, this.level);
+    this.Target = new DrawStick(this.ctx, this.level);
     this.Grid = new Grid(this.ctx, this.w, this.h);
+    this.StartAnimation = new StartAnimation(
+      this.ctx,
+      this.w,
+      this.h,
+      this.Stick
+    );
     this.checkIfModelIsLoaded();
   }
   loadBasicParamsForSketch() {
@@ -57,7 +65,14 @@ class App {
     le modèle de PosNet est starté
     *********************************/
     if (PARAMS.poseNet.isLoaded) {
+      // Start Animation Begin
       this.initListeners();
+      if (PARAMS.dev.state == true && this.stateApplication != 0) {
+        this.draw();
+      } else {
+        this.StartAnimation.start();
+        this.intro();
+      }
       // this.draw();
     } else {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));
@@ -68,6 +83,15 @@ class App {
       this.ElementsParts[0][0].position.x
     );
     this.arrayElements = calcAngles(this.ElementsParts);
+  }
+
+  intro() {
+    if (PARAMS.dev.state != true) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+    this.processAngles();
+    this.drawStick();
+    requestAnimationFrame(this.intro.bind(this));
   }
   draw() {
     /*********************************
@@ -83,7 +107,7 @@ class App {
     *********************************/
     // const counter = AnalyzePixels(this.ctx);
     // this.Grid.draw(counter);
-    this.Grid.draw();
+    // this.Grid.draw();
     this.processAngles();
     this.checkLevel();
     this.drawStick();
@@ -132,7 +156,7 @@ class App {
   drawStick() {
     this.ctx.beginPath();
     this.ctx.strokeStyle = "#000";
-    this.Stick.draw(this.arrayElements, this.posXSitckyPoint);
+    this.Stick.draw(this.arrayElements, this.posXSitckyPoint, this.level);
     this.ctx.stroke();
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.closePath();
@@ -154,6 +178,9 @@ class App {
       this.level = e;
       this.loadBasicParamsForSketch();
     }
+    //To change the path level
+    this.Stick.chooseLevel(this.level);
+    this.Target.chooseLevel(this.level);
     console.log("Level Selected: " + this.level + 1);
   }
   initListeners() {

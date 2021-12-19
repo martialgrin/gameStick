@@ -4,7 +4,8 @@ const PARAMS = {
     videoStream: true,
   },
   game: {
-    initialLevel: 2,
+    state: 1, // introduction = 0, game = 1 etc.
+    initialLevel: 3,
   },
 
   grid: {

@@ -12,10 +12,12 @@ const calcAngles = (arrayElems) => {
     if (LastAnglesArray.length != 0) {
       angle = lerp(LastAnglesArray[i], angle, 0.2);
     }
+
     array.push(angle);
   }
   // Store Last Element for the Next Frame (Essentially for the Lerp)
   LastAnglesArray = array;
+  // console.log(array);
 
   return array;
 };
