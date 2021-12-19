@@ -1,11 +1,11 @@
 const PARAMS = {
   dev: {
-    state: true, //all Tools for Developement
+    state: false, //all Tools for Developement
     videoStream: true,
   },
   game: {
-    state: 1, // introduction = 0, game = 1 etc.
-    initialLevel: 3,
+    state: 0, // introduction = 0, game = 1 etc.
+    initialLevel: 1,
   },
 
   grid: {

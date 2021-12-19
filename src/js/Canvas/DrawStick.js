@@ -11,12 +11,18 @@ class DrawStick {
     this.ctx = ctx;
     this.angles = [];
     this.level = level;
+    this.lineLength = 0.3;
     this.pathLevel = LEVELS[this.level].path;
   }
   chooseLevel(level) {
     this.level = level;
     this.pathLevel = LEVELS[this.level].path;
   }
+
+  setLineLength(e) {
+    this.lineLength = e;
+  }
+
   // from Drawstick with
   draw(angles, startPosX) {
     this.ctx.beginPath();
@@ -27,30 +33,37 @@ class DrawStick {
       if (i == 0) {
         this.drawLine(this.angles[i], 0);
       } else {
+        if (i == 3 && this.level == 0) {
+          this.drawHead();
+        }
         if (this.pathLevel[i] == 0) {
-          // You have to remember how many times it pass in the J
           this.drawLine(this.angles[i], this.angles[i - 1]);
         } else if (this.pathLevel[i] == 1) {
-          this.ctx.save();
-          this.drawLine(this.angles[i], this.angles[i - 1]);
-          for (let j = i + 1; j < this.angles.length; j++) {
-            if (this.pathLevel[j] == this.pathLevel[j - 1]) {
-              // this.ctx.arc(0, 0, 50, Math.PI * 2, 0);
-              this.ctx.fill();
-              i = i + 1;
-              this.ctx.save();
-              this.drawLine(this.angles[j], this.angles[j - 1]);
-              this.ctx.restore();
-              this.ctx.restore();
-            }
-          }
-          this.ctx.restore();
+          // CREATE A NEW PATH
+          this.drawNewPath(i);
         }
       }
     }
     this.restorePath();
     this.ctx.restore();
     this.ctx.closePath();
+  }
+  drawNewPath(i) {
+    // To draw another Path from the main
+    this.ctx.save();
+    this.drawLine(this.angles[i], this.angles[i - 1]);
+    for (let j = i + 1; j < this.angles.length; j++) {
+      if (this.pathLevel[j] == this.pathLevel[j - 1]) {
+        // this.ctx.arc(0, 0, 50, Math.PI * 2, 0);
+        this.ctx.fill();
+        i = i + 1;
+        this.ctx.save();
+        this.drawLine(this.angles[j], this.angles[j - 1]);
+        this.ctx.restore();
+        this.ctx.restore();
+      }
+    }
+    this.ctx.restore();
   }
   drawStartingPoint(startPosX) {
     this.ctx.save();
@@ -61,9 +74,17 @@ class DrawStick {
     this.ctx.save();
     this.ctx.rotate(angle);
     this.ctx.moveTo(0, 0);
-    this.ctx.lineTo(0.3 * this.width, 0);
-    this.ctx.translate(0.3 * this.width, 0);
+    this.ctx.lineTo(this.lineLength * this.width, 0);
+    this.ctx.translate(this.lineLength * this.width, 0);
     this.ctx.rotate(-angle);
+  }
+  drawHead() {
+    this.ctx.save();
+    this.ctx.translate(0, -0.25 * this.width);
+    this.ctx.moveTo(0, 0);
+    this.ctx.lineWidth = 0;
+    this.ctx.arc(0, 0, 60, 0, Math.PI * 2);
+    this.ctx.restore();
   }
   restorePath() {
     for (let i = 0; i < this.angles.length; i++) {

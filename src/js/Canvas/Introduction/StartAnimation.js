@@ -5,6 +5,7 @@ export default class StartAnimation {
     this.ctx = ctx;
     this.w = w;
     this.h = h;
+    this.lineLength = 0.01;
     this.init();
   }
   init() {
@@ -26,5 +27,9 @@ export default class StartAnimation {
   }
   start() {
     console.log("Start Animation");
+  }
+  setLineLength(lineLength) {
+    const num = lineLength + 0.01;
+    return num;
   }
 }

@@ -70,6 +70,8 @@ class App {
       if (PARAMS.dev.state == true && this.stateApplication != 0) {
         this.draw();
       } else {
+        this.lineLength = 0;
+        this.level = 0;
         this.StartAnimation.start();
         this.intro();
       }
@@ -84,12 +86,18 @@ class App {
     );
     this.arrayElements = calcAngles(this.ElementsParts);
   }
-
   intro() {
     if (PARAMS.dev.state != true) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     this.processAngles();
+    this.lineWidth = 300;
+    if (this.lineLength < 0.32) {
+      this.lineLength = this.StartAnimation.setLineLength(this.lineLength);
+      this.Stick.setLineLength(this.lineLength);
+    }
+    this.checkLevel();
+    this.drawTarget();
     this.drawStick();
     requestAnimationFrame(this.intro.bind(this));
   }
@@ -146,7 +154,10 @@ class App {
   drawTarget() {
     this.ctx.save();
     this.ctx.beginPath();
-    this.Target.draw(LEVELS[this.level].targetsAngle, 0.5);
+    this.Target.draw(
+      LEVELS[this.level].targetsAngle,
+      LEVELS[this.level].startXPosTarget
+    );
     this.ctx.lineWidth = this.target.lineWidth;
     this.ctx.strokeStyle = "#ff0000";
     this.ctx.stroke();

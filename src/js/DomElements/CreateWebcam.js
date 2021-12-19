@@ -2,7 +2,7 @@ let video;
 
 import PARAMS from "../PARAMS";
 import videoManStanding from "../../images/videoManStanding.mp4";
-import level_2 from "../../images/level_2.mp4";
+import level_2 from "../../images/manyMovements1.mp4";
 
 const createContainer = () => {
   video = document.createElement("video");
