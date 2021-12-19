@@ -58,6 +58,7 @@ class App {
     *********************************/
     if (PARAMS.poseNet.isLoaded) {
       this.initListeners();
+      // this.draw();
     } else {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));
     }
@@ -157,7 +158,6 @@ class App {
   }
   initListeners() {
     document.addEventListener("keyup", this.selectLevel.bind(this));
-    this.draw();
   }
 }
 
