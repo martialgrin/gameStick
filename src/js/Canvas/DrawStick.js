@@ -13,6 +13,7 @@ class DrawStick {
     this.level = level;
     this.lineLength = 0.3;
     this.pathLevel = LEVELS[this.level].path;
+    this.c = "#00ff00";
   }
   chooseLevel(level) {
     this.level = level;

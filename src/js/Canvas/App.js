@@ -8,6 +8,7 @@ import calcAngles from "../PositionCalcs/calcAngles";
 import { animationInTarget } from "./animationTarget";
 import Grid from "./Visual/Grid";
 import StartAnimation from "./Introduction/StartAnimation";
+import AnalyzePixels from "./Visual/AnalyzePixels";
 
 class App {
   constructor() {
@@ -67,15 +68,15 @@ class App {
     if (PARAMS.poseNet.isLoaded) {
       // Start Animation Begin
       this.initListeners();
-      if (PARAMS.dev.state == true && this.stateApplication != 0) {
-        this.draw();
-      } else {
-        this.lineLength = 0;
-        this.level = 0;
-        this.StartAnimation.start();
-        this.intro();
-      }
-      // this.draw();
+      // if (PARAMS.dev.state == true && this.stateApplication != 0) {
+      //   this.draw();
+      // } else {
+      //   this.lineLength = 0;
+      //   this.level = 0;
+      //   this.StartAnimation.start();
+      //   this.intro();
+      // }
+      this.draw();
     } else {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));
     }
@@ -108,17 +109,26 @@ class App {
     if (PARAMS.dev.state != true) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+    this.ctx.globalCompositeOperation = "screen";
     this.drawTarget();
+    this.processAngles();
+    this.checkLevel();
+    this.drawStick();
+
     /*********************************
      counter = all Pixels you analyze 
      you send the infos in grid
     *********************************/
-    // const counter = AnalyzePixels(this.ctx);
-    // this.Grid.draw(counter);
-    // this.Grid.draw();
-    this.processAngles();
-    this.checkLevel();
-    this.drawStick();
+    this.ctx.globalCompositeOperation = "normal";
+
+    const counter = AnalyzePixels(this.ctx);
+
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.drawTargetPost();
+    this.drawTargetWhite();
+    this.ctx.globalCompositeOperation = "multiply";
+    this.Grid.getArray(counter);
     requestAnimationFrame(this.draw.bind(this));
   }
   // You Have to make change here for the check level
@@ -164,9 +174,35 @@ class App {
     this.ctx.closePath();
     this.ctx.restore();
   }
+  drawTargetPost() {
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.Target.draw(
+      LEVELS[this.level].targetsAngle,
+      LEVELS[this.level].startXPosTarget
+    );
+    this.ctx.lineWidth = this.target.lineWidth;
+    this.ctx.strokeStyle = "#F0C701";
+    this.ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.restore();
+  }
+  drawTargetWhite() {
+    this.ctx.save();
+    this.ctx.beginPath();
+    this.Target.draw(
+      LEVELS[this.level].targetsAngle,
+      LEVELS[this.level].startXPosTarget
+    );
+    this.ctx.lineWidth = this.target.baseLineWidth - 40;
+    this.ctx.strokeStyle = "#ffffff";
+    this.ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.restore();
+  }
   drawStick() {
     this.ctx.beginPath();
-    this.ctx.strokeStyle = "#000";
+    this.ctx.strokeStyle = "#00ff00";
     this.Stick.draw(this.arrayElements, this.posXSitckyPoint, this.level);
     this.ctx.stroke();
     this.ctx.lineWidth = this.lineWidth;
@@ -179,12 +215,12 @@ class App {
     this.ElementsParts = preProcessArrayParts(datas, this.level);
   }
   selectLevel(e) {
-    if (PARAMS.dev.state) {
-      if (e.code == "Digit" + e.key) {
-        this.level = e.key - 1;
-        this.loadBasicParamsForSketch();
-      }
+    // if (PARAMS.dev.state) {
+    if (e.code == "Digit" + e.key) {
+      this.level = e.key - 1;
+      this.loadBasicParamsForSketch();
     }
+    // }
     if (typeof e == "number") {
       this.level = e;
       this.loadBasicParamsForSketch();

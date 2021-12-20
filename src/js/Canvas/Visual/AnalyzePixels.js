@@ -1,20 +1,36 @@
 import PARAMS from "../../PARAMS";
 
 const AnalyzePixels = (ctx) => {
-  let count = 0;
+  const w = PARAMS.canvas.width;
+  const h = PARAMS.canvas.height;
   const array = [];
-  for (let x = 0; x < PARAMS.canvas.analyze.tiles.x; x++) {
-    for (let y = 0; y < PARAMS.canvas.analyze.tiles.y; y++) {
-      const posX = (x * PARAMS.canvas.width) / PARAMS.canvas.analyze.tiles.x;
-      const posY = (y * PARAMS.canvas.height) / PARAMS.canvas.analyze.tiles.y;
-      count++;
+  const pixelData = ctx.getImageData(0, 0, w, h).data;
+  // for (let x = 0; x < w; x += PARAMS.canvas.analyze.tiles.x) {
+  //   for (let y = 0; y < h; y += PARAMS.canvas.analyze.tiles.y) {
+  //     let i = (x + y * (w / PARAMS.canvas.analyze.tiles.x)) * 4;
 
-      const pixelData = ctx.getImageData(posX, posY, 1, 1).data;
+  //     let r = pixelData[i + 0];
+  //     let g = pixelData[i + 1];
+  //     let b = pixelData[i + 2];
+  //     let a = pixelData[i + 3];
+  //     if (r == 255) {
+  //       console.log(r, g, b, a);
+  //     }
+  //     let l = (r + g + b) / 3;
+  //     array.push(r, g, b, l);
+  //   }
+  // }
 
-      array.push(pixelData);
-    }
-  }
-  return array;
+  // for (let i = 0; i < pixelData.length; i += 4) {
+  //   let r = pixelData[i + 0];
+  //   let g = pixelData[i + 1];
+  //   let b = pixelData[i + 2];
+  //   let a = pixelData[i + 3];
+  //   let l = (r + g + b) / 3;
+  //   array.push(r, g, b, l);
+  // }
+
+  return pixelData;
 };
 
 export default AnalyzePixels;

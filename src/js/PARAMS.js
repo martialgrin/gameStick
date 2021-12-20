@@ -4,7 +4,7 @@ const PARAMS = {
     videoStream: true,
   },
   game: {
-    state: 0, // introduction = 0, game = 1 etc.
+    state: 1, // introduction = 0, game = 1 etc.
     initialLevel: 1,
   },
 
@@ -26,7 +26,7 @@ const PARAMS = {
     width: null, // if Null define a width as window.innerWidth
     height: null, // if Null define a width as window.innerHeight
     analyze: {
-      tiles: { x: 50, y: 50 },
+      tiles: { x: 10, y: 10 },
     },
   },
   video: {
