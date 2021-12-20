@@ -43,6 +43,20 @@ const PARAMS = {
       someoneIsFront: false,
     },
   },
+  colorScheme: {
+    opt1: {
+      c1: "rgb(240, 26, 83)",
+      c2: "rgb(2, 186, 183)",
+      c3: "rgb(240, 199, 1)",
+      bg: "rgb(255, 255, 255)",
+    },
+    opt2: {
+      c1: "rgb(240, 26, 83)",
+      c2: "rgb(2, 186, 183)",
+      c3: "rgb(240, 199, 1)",
+      bg: "rgb(255, 255, 255)",
+    },
+  },
 };
 
 export default PARAMS;

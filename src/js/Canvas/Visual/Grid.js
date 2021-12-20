@@ -42,9 +42,9 @@ export default class Grid {
       for (let y = this.space; y <= this.h; y += this.space) {
         let i = (x + y * this.w) * 4;
         if (this.analyseArray[i + 0] < 255) {
-          this.c = "#02BAB7";
+          this.c = PARAMS.colorScheme.opt1.c1;
         } else {
-          this.c = "#F01A53";
+          this.c = PARAMS.colorScheme.opt1.c2;
         }
 
         if (this.analyseArray[i + 1] == 255) {
@@ -52,6 +52,7 @@ export default class Grid {
         } else {
           r = this.space / 10;
         }
+
         array.push({ r: r, c: this.c });
       }
     }

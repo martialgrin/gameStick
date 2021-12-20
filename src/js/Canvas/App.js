@@ -182,7 +182,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.lineWidth;
-    this.ctx.strokeStyle = "#F0C701";
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.c3;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();
@@ -195,7 +195,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.baseLineWidth - 40;
-    this.ctx.strokeStyle = "#ffffff";
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.bg;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();

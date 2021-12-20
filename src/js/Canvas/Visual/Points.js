@@ -7,7 +7,6 @@ class Points {
     this.y = y;
     this.r = r;
     this.pR = r;
-    this.basicR = r;
     this.c = c;
     this.changeState = false;
     this.count = 0;
