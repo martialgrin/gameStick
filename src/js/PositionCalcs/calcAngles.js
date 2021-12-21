@@ -30,10 +30,12 @@ const calcAngles = (arrayElems, changeLevel) => {
 >>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
       angle = lerp(LastAnglesArray[i], angle, 0.2);
     }
+
     array.push(angle);
   }
   // Store Last Element for the Next Frame (Essentially for the Lerp)
   LastAnglesArray = array;
+  // console.log(array);
 
 <<<<<<< HEAD
 =======

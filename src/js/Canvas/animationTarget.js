@@ -1,10 +1,10 @@
 import { elastic } from "../Utils";
 const animationInTarget = (target) => {
+  /****************************************
+   Code When You're stick is in the target
+  ***************************************/
   target.isInside = true;
   target.isInsideCount++;
-  /****************************************
-       Code When You're stick is in the target
-       ***************************************/
   target.lineWidth = elastic(
     target.isInsideCount,
     target.baseLineWidth,
@@ -14,6 +14,10 @@ const animationInTarget = (target) => {
   return target;
 };
 
-const animationOutTarget = () => {};
+const animationOutTarget = () => {
+  /****************************************
+  Code when you go out of the target
+  ***************************************/
+};
 
 export { animationInTarget, animationOutTarget };

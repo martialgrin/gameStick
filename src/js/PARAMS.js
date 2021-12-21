@@ -1,9 +1,13 @@
 const PARAMS = {
   dev: {
-    state: true, //all Tools for Developement
+    state: false, //all Tools for Developement
     videoStream: true,
   },
   game: {
+<<<<<<< HEAD
+=======
+    state: 1, // introduction = 0, game = 1 etc.
+>>>>>>> temp
     initialLevel: 1,
   },
 
@@ -28,7 +32,7 @@ const PARAMS = {
     width: null, // if Null define a width as window.innerWidth
     height: null, // if Null define a width as window.innerHeight
     analyze: {
-      tiles: { x: 50, y: 50 },
+      tiles: { x: 10, y: 10 },
     },
   },
   video: {
@@ -43,6 +47,20 @@ const PARAMS = {
     poses: {
       key: null,
       someoneIsFront: false,
+    },
+  },
+  colorScheme: {
+    opt1: {
+      c1: "rgb(240, 26, 83)",
+      c2: "rgb(2, 186, 183)",
+      c3: "rgb(240, 199, 1)",
+      bg: "rgb(255, 255, 255)",
+    },
+    opt2: {
+      c1: "rgb(255, 255, 255)",
+      c2: "rgb(0, 0, 255)",
+      c3: "rgb(255, 255, 255)",
+      bg: "rgb(0, 0, 0)",
     },
   },
 };
