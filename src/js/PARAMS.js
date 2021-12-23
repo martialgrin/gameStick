@@ -9,6 +9,7 @@ const PARAMS = {
   },
 
   grid: {
+    //repush
     nbBallsOnWidth: 20,
     color1: "0,0,255",
     color2: "0,255,0",
