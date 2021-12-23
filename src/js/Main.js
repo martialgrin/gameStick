@@ -19,6 +19,7 @@ const Main = () => {
 
 const VideoIsLoaded = () => {
   CANVAS.createCanvas(PARAMS.canvas.id);
+  // Create APP
   const canvasApp = new App();
   POSNET.LoadModel(canvasApp);
   ModelML5Loaded();
