@@ -3,12 +3,36 @@ import { preProcessArrayParts } from "../PositionCalcs/Parts";
 import LEVELS from "../LEVELS";
 import checkPartAndTarget from "../levelLogic/checkPartAndTarget";
 import DrawStick from "./DrawStick";
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+
+import { easeOutCirc } from "js-easing-functions";
+=======
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
+import { easeElastic, elastic } from "../Utils";
+import {
+  easeOutCirc,
+  easeInOutElastic,
+  easeInOutBounce,
+} from "js-easing-functions";
+import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
+import calcAngles from "../PositionCalcs/calcAngles";
+import { animationInTarget } from "./animationTarget";
+<<<<<<< HEAD
+=======
+import AnalyzePixels from "./AnalyzePixels";
+>>>>>>> Stashed changes
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
+=======
 import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
 import calcAngles from "../PositionCalcs/calcAngles";
 import { animationInTarget } from "./animationTarget";
 import Grid from "./Visual/Grid";
 import StartAnimation from "./Introduction/StartAnimation";
 import AnalyzePixels from "./Visual/AnalyzePixels";
+>>>>>>> temp
 
 class App {
   constructor() {
@@ -26,6 +50,7 @@ class App {
     this.stateApplication = PARAMS.game.state;
     this.viewGrid = PARAMS.dev.viewGrid;
     this.init();
+    this.changeLevel = false;
   }
   init() {
     if (PARAMS.dev.state) {
@@ -82,11 +107,64 @@ class App {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));
     }
   }
+<<<<<<< HEAD
+  initListeners() {
+    document.addEventListener("keyup", this.selectLevel.bind(this));
+    this.draw();
+  }
+
+<<<<<<< HEAD
+=======
+>>>>>>> temp
   processAngles() {
     this.posXSitckyPoint = calcPosStickyStartPoint(
       this.ElementsParts[0][0].position.x
     );
     this.arrayElements = calcAngles(this.ElementsParts);
+=======
+<<<<<<< Updated upstream
+  calcAngleForLine() {
+    this.initLastAngleArray();
+    const array = [];
+    this.posXSitckyPoint = map(
+      this.ElementsParts[0][0].position.x,
+      0,
+      PARAMS.video.width,
+      0,
+      1
+    );
+    this.posXSitckyPoint = lerp(
+      this.LastPosXStickyPoint,
+      this.posXSitckyPoint,
+      0.02
+    );
+    this.LastPosXStickyPoint = this.posXSitckyPoint;
+    for (let i = 0; i < this.ElementsParts.length; i++) {
+      const start = this.ElementsParts[i][0].position;
+      const end = this.ElementsParts[i][1].position;
+      let angle = calcRadian(start.x, start.y, end.x, end.y);
+      if (i == 0) {
+        // console.log(radianToDegree(angle));
+      }
+      angle = lerp(this.LastAnglesArray[i], angle, 0.2);
+      array.push(angle);
+    }
+    this.arrayElements = array;
+    // Store Last Element for the Next Frame
+    this.LastAnglesArray = this.arrayElements;
+=======
+  processAngles() {
+    // console.log(this.arrayElements);
+    // console.log(this.ElementsParts);
+    this.posXSitckyPoint = calcPosStickyStartPoint(
+      this.ElementsParts[0][0].position.x
+    );
+    this.arrayElements = calcAngles(this.ElementsParts, this.changeLevel);
+    if (this.changeLevel) {
+      this.changeLevel = false;
+    }
+>>>>>>> Stashed changes
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
   }
   intro() {
     if (PARAMS.dev.state != true) {
@@ -99,6 +177,19 @@ class App {
       this.Stick.setLineLength(this.lineLength);
     }
     this.checkLevel();
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+    // this.drawGrid();
+=======
+<<<<<<< Updated upstream
+=======
+    AnalyzePixels();
+    // this.drawGrid();
+>>>>>>> Stashed changes
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
+=======
+>>>>>>> temp
     this.drawTarget();
     this.drawStick();
     requestAnimationFrame(this.intro.bind(this));
@@ -148,6 +239,7 @@ class App {
       LEVELS[this.level].targetsAngle,
       this.level
     );
+<<<<<<< HEAD
 
     if (this.PartsInsideTarget) {
       this.target = animationInTarget(this.target);
@@ -155,6 +247,29 @@ class App {
         this.selectLevel(this.level + 1);
       }
       console.log("is Inside");
+=======
+<<<<<<< Updated upstream
+    if (this.PartsInsideTarget) {
+      this.target.isInsideCount++;
+      /****************************************
+       Code When You're stick is in the target
+       ***************************************/
+
+      this.target.lineWidth += 100;
+      console.log("You're in the Target");
+=======
+
+    // console.log(this.arrayElements, LEVELS[this.level].targetsAngle);
+
+    if (this.PartsInsideTarget) {
+      this.target = animationInTarget(this.target);
+      if (this.target.isInsideCount == 80) {
+        this.changeLevel = true;
+        this.selectLevel(this.level + 1);
+      }
+      console.log("is Inside");
+>>>>>>> Stashed changes
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
     } else {
       if (this.target.isInside) {
         this.target.maxLineWidth = 0;

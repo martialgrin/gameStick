@@ -95,6 +95,11 @@ const LEVELS = [
       },
     ],
   },
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
   {
     errorMargin: 0.3,
     id: 3,
@@ -118,6 +123,12 @@ const LEVELS = [
         end: 9,
       },
       {
+<<<<<<< HEAD
+        name: "FromLeftHipToLeftAnkle",
+<<<<<<< HEAD
+        start: 15,
+        end: 11,
+=======
         name: "FromLeftShoulderToRightShoulder",
         start: 5,
         end: 6,
@@ -155,9 +166,18 @@ const LEVELS = [
         name: "FromLeftShoulderToRightShoulder",
         start: 11,
         end: 13,
+>>>>>>> temp
       },
     ],
   },
+=======
+        start: 8,
+        end: 10,
+      },
+    ],
+  },
+>>>>>>> Stashed changes
+>>>>>>> f1e1a7a8f3ece5c2a29c68ad74d30f89de1659a7
 ];
 
 // 0: Nose

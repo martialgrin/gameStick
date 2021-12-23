@@ -5,7 +5,10 @@ const PARAMS = {
     viewGrid: true,
   },
   game: {
+<<<<<<< HEAD
+=======
     state: 1, // introduction = 0, game = 1 etc.
+>>>>>>> temp
     initialLevel: 1,
   },
 
@@ -16,6 +19,9 @@ const PARAMS = {
   },
   stick: {
     lineWidth: 400,
+  },
+  analyze: {
+    tiles: { x: 50, y: 100 },
   },
   targetStick: {
     lineWidth: 175, // to add from the stick lineWidth
