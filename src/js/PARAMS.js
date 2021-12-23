@@ -1,7 +1,8 @@
 const PARAMS = {
   dev: {
-    state: false, //all Tools for Developement
+    state: true, //all Tools for Developement
     videoStream: true,
+    viewGrid: true,
   },
   game: {
     state: 1, // introduction = 0, game = 1 etc.
@@ -9,7 +10,7 @@ const PARAMS = {
   },
 
   grid: {
-    nbBallsOnWidth: 20,
+    nbBallsOnWidth: 15,
     color1: "0,0,255",
     color2: "0,255,0",
   },
