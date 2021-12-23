@@ -1,20 +1,27 @@
 const PARAMS = {
   dev: {
-    state: false, //all Tools for Developement
+    state: true, //all Tools for Developement
     videoStream: true,
+    viewGrid: true,
   },
   game: {
+<<<<<<< HEAD
+=======
     state: 1, // introduction = 0, game = 1 etc.
+>>>>>>> temp
     initialLevel: 1,
   },
 
   grid: {
-    nbBallsOnWidth: 20,
+    nbBallsOnWidth: 15,
     color1: "0,0,255",
     color2: "0,255,0",
   },
   stick: {
     lineWidth: 400,
+  },
+  analyze: {
+    tiles: { x: 50, y: 100 },
   },
   targetStick: {
     lineWidth: 175, // to add from the stick lineWidth
