@@ -121,18 +121,18 @@ class App {
     *********************************/
     this.ctx.globalCompositeOperation = "normal";
 
-    const counter = AnalyzePixels(this.ctx);
+    // const counter = AnalyzePixels(this.ctx);
 
-    this.ctx.beginPath();
-    this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.fillStyle = PARAMS.colorScheme.opt2.bg;
-    this.ctx.fill();
-    this.ctx.closePath();
+    // this.ctx.beginPath();
+    // this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+    // this.ctx.fillStyle = PARAMS.colorScheme.opt2.bg;
+    // this.ctx.fill();
+    // this.ctx.closePath();
 
-    this.drawTargetPost();
-    this.drawTargetWhite();
-    this.ctx.globalCompositeOperation = "screen";
-    this.Grid.getArray(counter);
+    // this.drawTargetPost();
+    // this.drawTargetWhite();
+    // this.ctx.globalCompositeOperation = "screen";
+    // this.Grid.getArray(counter);
     requestAnimationFrame(this.draw.bind(this));
   }
   // You Have to make change here for the check level
