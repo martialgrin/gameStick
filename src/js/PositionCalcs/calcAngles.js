@@ -8,8 +8,11 @@ const calcAngles = (arrayElems) => {
     const start = arrayElems[i][0].position;
     const end = arrayElems[i][1].position;
     let angle = calcRadian(start.x, start.y, end.x, end.y);
-    // Prevent for the first call
-    if (LastAnglesArray.length != 0) {
+    // Prevent for the first call & Change Level
+    if (
+      LastAnglesArray.length != 0 &&
+      arrayElems.length == LastAnglesArray.length
+    ) {
       angle = lerp(LastAnglesArray[i], angle, 0.2);
     }
 
@@ -18,7 +21,6 @@ const calcAngles = (arrayElems) => {
   // Store Last Element for the Next Frame (Essentially for the Lerp)
   LastAnglesArray = array;
   // console.log(array);
-
   return array;
 };
 

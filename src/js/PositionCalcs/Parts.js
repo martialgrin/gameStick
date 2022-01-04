@@ -57,6 +57,7 @@ const PartsViewed = (datas, id) => {
       array.push(datas[body.parts]);
     }
   }
+
   return array;
 };
 
