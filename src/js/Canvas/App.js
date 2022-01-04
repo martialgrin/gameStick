@@ -123,11 +123,15 @@ class App {
 
     const counter = AnalyzePixels(this.ctx);
 
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.beginPath();
+    this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = PARAMS.colorScheme.opt2.bg;
+    this.ctx.fill();
+    this.ctx.closePath();
 
     this.drawTargetPost();
     this.drawTargetWhite();
-    this.ctx.globalCompositeOperation = "multiply";
+    this.ctx.globalCompositeOperation = "screen";
     this.Grid.getArray(counter);
     requestAnimationFrame(this.draw.bind(this));
   }
@@ -182,7 +186,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.lineWidth;
-    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.c3;
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt2.c3;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();
@@ -195,7 +199,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.baseLineWidth - 40;
-    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.bg;
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt2.bg;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();
