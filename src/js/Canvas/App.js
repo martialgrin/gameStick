@@ -145,7 +145,6 @@ class App {
       LEVELS[this.level].targetsAngle,
       this.level
     );
-    console.log(this.target.isInsideCount);
 
     if (this.PartsInsideTarget) {
       this.target = animationInTarget(this.target);
@@ -159,7 +158,6 @@ class App {
         this.target.isInside = false;
         this.target.isInsideCount = 0;
       }
-      // console.log(this.target.baseLineWidth, this.target.lineWidth);
       if (this.target.lineWidth > this.target.baseLineWidth) {
         this.target.isOutsideCount += 2;
         this.target.lineWidth -= 50;

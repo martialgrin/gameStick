@@ -9,6 +9,7 @@ class DrawStick {
     this.height = PARAMS.canvas.height;
     this.arrayRadian = [];
     this.ctx = ctx;
+    this.countIntro = 0;
     this.angles = [];
     this.level = level;
     this.lineLength = 0.3;
@@ -26,28 +27,52 @@ class DrawStick {
 
   // from Drawstick with
   draw(angles, startPosX) {
-    this.ctx.beginPath();
+    if (this.level == 0) {
+      this.countIntro += 0.001;
+      this.angles = angles;
+      this.drawStartingPoint(startPosX);
 
-    this.angles = angles;
-    this.drawStartingPoint(startPosX);
-    for (let i = 0; i < this.angles.length; i++) {
-      if (i == 0) {
-        this.drawLine(this.angles[i], 0);
-      } else {
-        if (i == 3 && this.level == 0) {
-          this.drawHead();
-        }
-        if (this.pathLevel[i] == 0) {
-          this.drawLine(this.angles[i], this.angles[i - 1]);
-        } else if (this.pathLevel[i] == 1) {
-          // CREATE A NEW PATH
-          this.drawNewPath(i);
+      for (let i = 0; i < this.angles.length; i++) {
+        if (i == 0) {
+          this.drawLine(this.angles[i], 0);
+        } else {
+          if (i == 3) {
+            this.drawHead();
+          }
+          if (this.pathLevel[i] == 0) {
+            this.drawLineIntro(this.angles[i], this.angles[i - 1]);
+          } else if (this.pathLevel[i] == 1) {
+            // CREATE A NEW PATH
+            this.drawNewPath(i);
+          }
         }
       }
+      this.restorePath();
+      this.ctx.restore();
+    } else {
+      this.ctx.beginPath();
+
+      this.angles = angles;
+      this.drawStartingPoint(startPosX);
+      for (let i = 0; i < this.angles.length; i++) {
+        if (i == 0) {
+          this.drawLine(this.angles[i], 0);
+        } else {
+          if (i == 3 && this.level == 0) {
+            this.drawHead();
+          }
+          if (this.pathLevel[i] == 0) {
+            this.drawLine(this.angles[i], this.angles[i - 1]);
+          } else if (this.pathLevel[i] == 1) {
+            // CREATE A NEW PATH
+            this.drawNewPath(i);
+          }
+        }
+      }
+      this.restorePath();
+      this.ctx.restore();
+      this.ctx.closePath();
     }
-    this.restorePath();
-    this.ctx.restore();
-    this.ctx.closePath();
   }
   drawNewPath(i) {
     // To draw another Path from the main
@@ -79,6 +104,15 @@ class DrawStick {
     this.ctx.translate(this.lineLength * this.width, 0);
     this.ctx.rotate(-angle);
   }
+
+  drawLineIntro(angle) {
+    this.ctx.rotate(angle);
+    this.ctx.moveTo(0, 0);
+    this.ctx.lineTo(this.lineLength * this.width, 0);
+    this.ctx.translate(this.lineLength * this.width, 0);
+    this.ctx.rotate(-angle);
+  }
+
   drawHead() {
     this.ctx.save();
     this.ctx.translate(0, -0.25 * this.width);

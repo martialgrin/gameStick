@@ -20,7 +20,6 @@ const calcAngles = (arrayElems) => {
   }
   // Store Last Element for the Next Frame (Essentially for the Lerp)
   LastAnglesArray = array;
-  // console.log(array);
   return array;
 };
 

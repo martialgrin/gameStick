@@ -5,7 +5,7 @@ const PARAMS = {
   },
   game: {
     state: 1, // introduction = 0, game = 1 etc.
-    initialLevel: 2,
+    initialLevel: 1,
   },
 
   grid: {

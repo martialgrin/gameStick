@@ -28,6 +28,4 @@ const modelLoaded = (canvasApp) => {
   });
 };
 
-const normalizeEachPoint = () => {};
-
 export { LoadModel };

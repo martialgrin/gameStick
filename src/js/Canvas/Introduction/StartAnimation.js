@@ -28,6 +28,7 @@ export default class StartAnimation {
   start() {
     console.log("Start Animation");
   }
+
   setLineLength(lineLength) {
     const num = lineLength + 0.01;
     return num;
