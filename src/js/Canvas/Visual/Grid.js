@@ -1,68 +1,150 @@
 import PARAMS from "../../PARAMS";
+import { lerp, map } from "../../Utils";
+import * as PIXI from "pixi.js";
 import Points from "./Points";
 
 /*********************
  Draw Sketch of Grid 
  *******************/
 
+const RADIUS = 0.5;
+const RGB_DIV255 = 1 / 255;
+const DIV3 = 1 / 3;
+const OFFSET_Y = Math.sqrt((RADIUS * 2) ** 2 - RADIUS ** 2);
+
 export default class Grid {
-  constructor(ctx, w, h) {
-    this.ctx = ctx;
-    this.w = w;
-    this.h = h;
-    this.c = "#000000";
-    this.nbBallsGrid = PARAMS.grid.nbBallsOnWidth;
-    this.space = this.w / this.nbBallsGrid;
-    this.points = [];
-    this.analyseArray = [];
-    this.init();
-  }
-  init() {
-    console.log("Init Grid");
-    this.drawGrid();
+  constructor() {
+    this.canvas = document.createElement("canvas");
+    this.analysedCanvas = PARAMS.canvas.ctx;
+
+    this.canvas.width = PARAMS.canvas.width / 3;
+    this.canvas.height = PARAMS.canvas.height / 3;
+
+    this.ctx = this.canvas.getContext("2d");
+
+    this.scale = [];
+    this.cells = [];
+
+    //this.container = new PIXI.Container();
+
+    this.setup();
   }
 
-  getArray(array) {
-    this.analyseArray = array;
-    this.draw();
+  setup() {
+    this.app = new PIXI.Application({
+      width: this.canvas.width,
+      height: this.canvas.height,
+      backgroundColor: PARAMS.colorScheme.opt1.bg,
+      resolution: PARAMS.canvas.pixelRatio,
+      antialias: true,
+    });
+    document.body.appendChild(this.app.view);
+    this.container = new PIXI.Container();
+    this.app.stage.addChild(this.container);
+    this.drawGrid();
+
+    const { stage } = this.app;
   }
 
   drawGrid() {
-    for (let x = this.space; x <= this.w; x += this.space) {
-      for (let y = this.space; y <= this.h; y += this.space) {
-        this.points.push(new Points(this.ctx, x, y, this.space, this.c));
+    for (let column = 0; column < PARAMS.grid.columns; column++) {
+      for (let row = 0; row < PARAMS.grid.rows; row++) {
+        const offsetX = (row % 2) * 0.5;
+        const ellipse = new Points({
+          x: column + offsetX - 0.25,
+          y: row * OFFSET_Y + OFFSET_Y - 0.25,
+          row,
+          column,
+          radius: 0.5,
+          scale: 1,
+          scale: 1,
+        });
+        ellipse.generate();
+
+        this.cells.push(ellipse);
+        this.container.addChild(ellipse.graphics);
       }
+    }
+
+    // Move container to the center
+    this.container.x = this.canvas.width / 6;
+    this.container.y = this.canvas.height / 6;
+
+    // Center sprite in local container coordinates
+    this.container.pivot.x = PARAMS.grid.columns / 2 + 0.25;
+    this.container.pivot.y = PARAMS.grid.rows / 2;
+    this.container.scale.set(this.canvas.width / (PARAMS.grid.columns - 2) / 3);
+
+    // Listen for animate update
+    //this.app.ticker.add(this.draw.bind(this));
+  }
+
+  getPixelHexColor(column, row, pixelData) {
+    const { width, height } = PARAMS.canvas;
+    // prettier-ignore
+    const x = map(column , 0, PARAMS.grid.columns, 0, width);
+    // prettier-ignore
+    const y = map(row + 0.5 , 0, PARAMS.grid.rows, 0, height);
+    // ~~ = Math.floor()
+    const i = (~~x + ~~y * width) * 4;
+
+    const r = pixelData[i + 0] * RGB_DIV255;
+    const g = pixelData[i + 1] * RGB_DIV255;
+    const b = pixelData[i + 2] * RGB_DIV255;
+
+    return [r, g, b];
+  }
+
+  draw(ctx) {
+    this.analysedCanvas = ctx;
+    const { cells } = this;
+    let i = cells.length;
+    const pixels = this.analyzePixels(this.analysedCanvas);
+
+    for (; i--; ) {
+      const child = cells[i];
+      const color = this.getPixelHexColor(child.column, child.row, pixels);
+      const [r, g, b] = color;
+      //let luminosity = (r + g + b) * DIV3;
+      //luminosity = map(luminosity ** 0.5, 0, 1, 1, 0.2);
+
+      //? si pas de corp
+      if (color[1] != 1) {
+        //! gris
+        child.setColor(PARAMS.colorScheme.opt1.c3);
+      }
+      //? si corp
+      else if (color[1] == 1) {
+        child.setColor(PARAMS.colorScheme.opt1.c2);
+      } else {
+        child.setColor(PARAMS.colorScheme.opt1.c3);
+      }
+      if (color[0] == 1 && color[1] != 1) {
+        child.setColor(PARAMS.colorScheme.opt1.c1);
+      }
+
+      //? si recherche et corp
+      if (color[0] == 1 && color[1] == 1) {
+        child.setScale(1);
+      }
+      //? si recherche
+      else if (color[0] == 1) {
+        child.setScale(0.6);
+      }
+      //? si corp mais pas recherche
+      else if (color[1] == 1 && color[0] != 1) {
+        child.setScale(0.6);
+      } else {
+        child.setScale(0.3);
+      }
+
+      child.update();
     }
   }
 
-  defineParams() {
-    const array = [];
-    let r = 0;
-    for (let x = 0; x <= this.w; x += this.space) {
-      for (let y = this.space; y <= this.h; y += this.space) {
-        let i = (x + y * this.w) * 4;
-        if (this.analyseArray[i + 0] < 255) {
-          this.c = PARAMS.colorScheme.opt2.c1;
-        } else {
-          this.c = PARAMS.colorScheme.opt2.c2;
-        }
-
-        if (this.analyseArray[i + 1] == 255) {
-          r = this.space;
-        } else {
-          r = this.space / 10;
-        }
-
-        array.push({ r: r, c: this.c });
-      }
-    }
-    return array;
-  }
-
-  draw() {
-    const array = this.defineParams();
-    for (let i = 0; i < this.points.length; i++) {
-      this.points[i].show(array[i].r, array[i].c);
-    }
+  analyzePixels(ctx) {
+    const { width, height } = ctx.canvas;
+    this.pixelData = ctx.getImageData(0, 0, width, height).data;
+    return this.pixelData;
   }
 }

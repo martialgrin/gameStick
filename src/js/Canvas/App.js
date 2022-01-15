@@ -13,7 +13,7 @@ import AnalyzePixels from "./Visual/AnalyzePixels";
 class App {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
-    this.pixelDensity = 3;
+    this.pixelDensity = PARAMS.canvas.pixelRatio;
     this.canvas.width = this.w = window.innerWidth * this.pixelDensity;
     this.canvas.height = this.h = window.innerHeight * this.pixelDensity;
     PARAMS.canvas.width = this.w;
@@ -35,7 +35,7 @@ class App {
     this.loadBasicParamsForSketch();
     this.Stick = new DrawStick(this.ctx, this.level);
     this.Target = new DrawStick(this.ctx, this.level);
-    this.Grid = new Grid(this.ctx, this.w, this.h);
+    this.Grid = new Grid();
     this.StartAnimation = new StartAnimation(
       this.ctx,
       this.w,
@@ -121,18 +121,19 @@ class App {
     *********************************/
     this.ctx.globalCompositeOperation = "normal";
 
-    // const counter = AnalyzePixels(this.ctx);
+    const counter = AnalyzePixels(this.ctx);
 
     // this.ctx.beginPath();
     // this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
-    // this.ctx.fillStyle = PARAMS.colorScheme.opt2.bg;
+    // this.ctx.fillStyle = PARAMS.colorScheme.opt1.bg;
     // this.ctx.fill();
     // this.ctx.closePath();
 
     // this.drawTargetPost();
     // this.drawTargetWhite();
-    // this.ctx.globalCompositeOperation = "screen";
-    // this.Grid.getArray(counter);
+    this.ctx.globalCompositeOperation = "screen";
+    this.Grid.draw(this.ctx);
+    //this.Grid.getArray(counter);
     requestAnimationFrame(this.draw.bind(this));
   }
   // You Have to make change here for the check level
@@ -185,7 +186,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.lineWidth;
-    this.ctx.strokeStyle = PARAMS.colorScheme.opt2.c3;
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.c3;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();
@@ -198,7 +199,7 @@ class App {
       LEVELS[this.level].startXPosTarget
     );
     this.ctx.lineWidth = this.target.baseLineWidth - 40;
-    this.ctx.strokeStyle = PARAMS.colorScheme.opt2.bg;
+    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.bg;
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();

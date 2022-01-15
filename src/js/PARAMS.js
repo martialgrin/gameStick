@@ -9,9 +9,9 @@ const PARAMS = {
   },
 
   grid: {
-    nbBallsOnWidth: 20,
-    color1: "0,0,255",
-    color2: "0,255,0",
+    // 715 x 971 px
+    columns: 25,
+    rows: 42,
   },
   stick: {
     lineWidth: 400,
@@ -25,9 +25,7 @@ const PARAMS = {
     ctx: "2d",
     width: null, // if Null define a width as window.innerWidth
     height: null, // if Null define a width as window.innerHeight
-    analyze: {
-      tiles: { x: 10, y: 10 },
-    },
+    pixelRatio: 3,
   },
   video: {
     width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas
@@ -44,17 +42,23 @@ const PARAMS = {
     },
   },
   colorScheme: {
-    opt1: {
-      c1: "rgb(240, 26, 83)",
-      c2: "rgb(2, 186, 183)",
-      c3: "rgb(240, 199, 1)",
-      bg: "rgb(255, 255, 255)",
-    },
     opt2: {
-      c1: "rgb(255, 255, 255)",
-      c2: "rgb(0, 0, 255)",
-      c3: "rgb(255, 255, 255)",
-      bg: "rgb(0, 0, 0)",
+      c1: 0xf01a53,
+      c2: 0x02bab7,
+      c3: 0xf0c701,
+      bg: 0xffffff,
+    },
+    opt3: {
+      c1: 0x359ede,
+      c2: 0xab4218,
+      c3: 0x4d5178,
+      bg: 0xe6965a,
+    },
+    opt1: {
+      c1: 0x00ffff,
+      c2: 0xaa00dd,
+      c3: 0xcccccc,
+      bg: 0xffffff,
     },
   },
 };

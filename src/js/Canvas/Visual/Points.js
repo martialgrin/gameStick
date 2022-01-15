@@ -1,40 +1,46 @@
-import { lerp } from "../../Utils";
+import { lerp, map, lerpHex } from "../../Utils";
+import * as PIXI from "pixi.js";
 
 class Points {
-  constructor(ctx, x, y, r, c) {
-    this.ctx = ctx;
+  constructor({ radius, scale, x, y, column, row }) {
     this.x = x;
     this.y = y;
-    this.r = r;
-    this.pR = r;
-    this.c = c;
-    this.changeState = false;
-    this.count = 0;
-    this.odd = 0;
-    this.odd = y / r;
-    this.init();
+    this.column = column;
+    this.row = row;
+    this.radius = radius;
+    this.scale = scale;
+    this.smoothScale = scale;
+    this.startColor = 0xffffff;
+    this.smoothColor = 0xffffff;
+    this.color = 0xffffff;
   }
 
-  init() {
-    if (this.odd % 2 != 0) {
-      this.x += this.r / 2;
-    }
-    this.y = this.y - this.r / 2;
+  generate() {
+    this.graphics = new PIXI.Graphics();
+    const g = this.graphics;
+    g.beginFill(this.color, 1);
+    g.drawCircle(0, -this.radius, this.radius);
+    g.endFill();
+
+    this.setScale(this.scale);
+    g.x = this.x;
+    g.y = this.y + this.radius;
   }
 
-  show(r, c) {
-    this.r = r;
-    this.c = c;
-    if (this.pR != this.r) {
-      this.r = lerp(this.pR, this.r, 0.2);
-    }
+  update() {
+    this.smoothScale = lerp(this.smoothScale, this.scale, 0.5);
+    this.smoothColor = lerpHex(this.smoothColor, this.color, 0.5);
+    this.graphics.scale.x = this.smoothScale;
+    this.graphics.scale.y = this.smoothScale;
+    this.graphics.tint = this.smoothColor;
+  }
 
-    this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y - this.r / 1.5, this.r / 2, 0, 2 * Math.PI);
-    this.ctx.fill();
-    this.ctx.fillStyle = this.c;
-    this.ctx.closePath();
-    this.pR = this.r;
+  setColor(rgbArray) {
+    this.color = rgbArray;
+  }
+
+  setScale(newScale) {
+    this.scale = newScale;
   }
 }
 

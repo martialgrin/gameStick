@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "js-easing-functions": "^1.0.3",
+    "pixi.js": "^6.2.1",
     "stats.js": "^0.17.0",
     "three": "^0.134.0"
   },

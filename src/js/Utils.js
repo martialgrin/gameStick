@@ -117,7 +117,21 @@ function elastic(elapsed, initialValue, amountOfChange, duration) {
   );
 }
 
+const lerpHex = function (a, b, pRatio) {
+  const ar = (a & 0xff0000) >> 16,
+    ag = (a & 0x00ff00) >> 8,
+    ab = a & 0x0000ff,
+    br = (b & 0xff0000) >> 16,
+    bg = (b & 0x00ff00) >> 8,
+    bb = b & 0x0000ff,
+    rr = ar + pRatio * (br - ar),
+    rg = ag + pRatio * (bg - ag),
+    rb = ab + pRatio * (bb - ab);
+  return (rr << 16) + (rg << 8) + (rb | 0);
+};
+
 export {
+  lerpHex,
   elastic,
   easeElastic,
   lerp,
