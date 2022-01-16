@@ -115,14 +115,20 @@ class App {
     this.checkLevel();
     this.drawStick();
 
+    //! debug
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "#0000ff";
+    this.ctx.arc(this.w / 2, 500, 100, 0, Math.PI * 2);
+    this.ctx.stroke();
+    this.ctx.lineWidth = this.lineWidth;
+    this.ctx.closePath();
+    //! debug
+
     /*********************************
      counter = all Pixels you analyze 
      you send the infos in grid
     *********************************/
     this.ctx.globalCompositeOperation = "normal";
-
-    const counter = AnalyzePixels(this.ctx);
-
     // this.ctx.beginPath();
     // this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
     // this.ctx.fillStyle = PARAMS.colorScheme.opt1.bg;

@@ -58,6 +58,7 @@ const PARAMS = {
       c1: 0x00ffff,
       c2: 0xaa00dd,
       c3: 0xcccccc,
+      c4: 0xaacccc,
       bg: 0xffffff,
     },
   },

@@ -22,4 +22,9 @@ const protoype = (points) => {
   }
 };
 
+document.addEventListener("onmousedown", function () {
+  console.log("mouseDown");
+  child.setPos(this.newX, this.newY);
+});
+
 export default protoype;
