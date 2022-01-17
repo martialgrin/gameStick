@@ -4,6 +4,7 @@ import * as POSNET from "./ML5/PosNet";
 import App from "./Canvas/App";
 import PARAMS from "./PARAMS";
 import Stats from "stats.js";
+import Loader from "./Loading/loader";
 
 const stats = new Stats();
 
@@ -13,6 +14,7 @@ const Main = () => {
     document.body.appendChild(stats.dom);
     statsViewer();
   }
+  new Loader();
   WEBCAM.createContainer(PARAMS.video.width, PARAMS.video.height);
   VideoIsLoaded();
 };
