@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: false,
+    videoStream: true,
   },
   window: {
     width: 720,
@@ -15,9 +15,9 @@ const PARAMS = {
     loop: true,
     loopEnd: false,
     id: "loader",
-    speed: 1,
+    speed: 2,
     size: 200,
-    minDuration: 4000, //in ms
+    minDuration: 5000, //in ms
     explode: false,
   },
   grid: {

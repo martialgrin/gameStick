@@ -67,15 +67,26 @@ class Loader {
     return 0.5 * (1 + Math.sin(2 * pi * frequency * time));
   }
   transitionOnEnd() {
-    this.radius = lerp(this.radius, 0, 0.05);
+    this.r = lerp(this.r, 0, 0.08);
   }
 
+  //   onEndLoader() {
+  //     if (this.radius > 1) {
+  //       this.transitionOnEnd();
+  //     }
+  //     this.drawCanvas();
+  //     this.r = this.pulse(this.count * this.loaderElem.speed) * 100 + this.radius;
+  //     if (this.r > 20) {
+  //       requestAnimationFrame(this.onEndLoader.bind(this));
+  //     } else {
+  //       this.endLoader();
+  //     }
+  //   }
   onEndLoader() {
-    if (this.radius > 1) {
-      this.transitionOnEnd();
-    }
+    this.transitionOnEnd();
+
     this.drawCanvas();
-    this.r = this.pulse(this.count * this.loaderElem.speed) * 100 + this.radius;
+    // this.r = this.pulse(this.count * this.loaderElem.speed) * 100 + this.radius;
     if (this.r > 20) {
       requestAnimationFrame(this.onEndLoader.bind(this));
     } else {

@@ -4,8 +4,8 @@ import PARAMS from "../../PARAMS";
 
 class Points {
   constructor({ radius, scale, x, y, column, row }) {
-    this.x = ~~PARAMS.grid.columns / 2;
-    this.y = ~~PARAMS.grid.rows / 2;
+    this.x = ~~PARAMS.grid.columns / 2 + 0.3;
+    this.y = ~~PARAMS.grid.rows / 2 + 0.3;
     this.newX = x;
     this.newY = y;
     this.column = column;
