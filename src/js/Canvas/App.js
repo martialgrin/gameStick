@@ -38,7 +38,8 @@ class App {
     this.Target = new DrawStick(this.ctx, this.level);
     this.PostTarget = new DrawStick(this.ctx, LEVELS.length - 1);
 
-    // this.Grid = new Grid();
+    //! REPLACE GRID
+    //this.Grid = new Grid();
 
     this.checkIfModelIsLoaded();
   }
@@ -85,7 +86,7 @@ class App {
     }
     this.ctx.globalCompositeOperation = "normal";
 
-    // this.drawTargetPost();
+    this.drawTargetPost();
 
     this.ctx.globalCompositeOperation = "screen";
 
@@ -94,14 +95,13 @@ class App {
     this.checkLevel();
     this.drawStick();
 
-    // //! debug
+    //! debug
     // this.ctx.beginPath();
     // this.ctx.strokeStyle = "#0000ff";
-    // this.ctx.arc(this.w / 2, 500, 100, 0, Math.PI * 2);
+    // this.ctx.arc(this.w / 2, this.h / 2, 10, 0, Math.PI * 2);
     // this.ctx.stroke();
     // this.ctx.lineWidth = this.lineWidth;
     // this.ctx.closePath();
-    //! debug
 
     /*********************************
      counter = all Pixels you analyze 
@@ -116,8 +116,8 @@ class App {
 
     // this.drawTargetWhite();
     this.ctx.globalCompositeOperation = "screen";
-    // this.Grid.draw(this.ctx);
-    //this.Grid.getArray(counter);
+    //! REPLACE GRID
+    //this.Grid.draw(this.ctx);
     requestAnimationFrame(this.draw.bind(this));
   }
   // You Have to make change here for the check level

@@ -58,7 +58,7 @@ class Loader {
 
   drawCanvas() {
     this.count += 1;
-    this.fillColor = lerpHex(this.fillColor, this.endFillColor, 0.01);
+    this.fillColor = lerpHex(this.fillColor, this.endFillColor, 0.01) || "#fff";
     // console.log(this.fillColor.toString(16));
     this.ctx.clearRect(0, 0, this.w, this.h);
     this.ctx.beginPath();
