@@ -21,10 +21,10 @@ const PARAMS = {
     rows: 42,
   },
   stick: {
-    lineWidth: 400,
+    lineWidth: 150,
   },
   targetStick: {
-    lineWidth: 175, // to add from the stick lineWidth
+    lineWidth: 100, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
