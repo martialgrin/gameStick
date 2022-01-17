@@ -25,10 +25,10 @@ const PARAMS = {
     rows: 55,
   },
   stick: {
-    lineWidth: 40,
+    lineWidth: 15,
   },
   targetStick: {
-    lineWidth: 25, // to add from the stick lineWidth
+    lineWidth: 10, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
@@ -37,11 +37,11 @@ const PARAMS = {
     width: null, // if Null define a width as window.innerWidth
     height: null, // if Null define a width as window.innerHeight
     pixelRatio: 3,
-    divisionResolution: 4,
+    divisionResolution: 6,
   },
   video: {
-    width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas
-    height: 480, //480-Screen MID - 0 for window height - it will be the same size for the canvas
+    width: 135, //270-Screen MID - 0 for window width - it will be the same size for the canvas
+    height: 240, //480-Screen MID - 0 for window height - it will be the same size for the canvas
     videoIsReady: false,
     obj: null,
   },
