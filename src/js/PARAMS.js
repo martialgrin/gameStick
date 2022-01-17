@@ -16,8 +16,9 @@ const PARAMS = {
     loopEnd: false,
     id: "loader",
     speed: 1,
-    size: 100,
+    size: 200,
     minDuration: 4000, //in ms
+    explode: false,
   },
   grid: {
     // 715 x 971 px

@@ -37,8 +37,8 @@ class Points {
   }
 
   update() {
-    this.smoothScale = lerp(this.smoothScale, this.scale, 0.5);
-    this.smoothColor = lerpHex(this.smoothColor, this.color, 0.5);
+    this.smoothScale = lerp(this.smoothScale, this.scale, 0.2);
+    this.smoothColor = lerpHex(this.smoothColor, this.color, 0.2);
     // prettier-ignore
     this.smoothPosX = lerp(this.smoothPosX,this.x, this.stepPos.x);
     // prettier-ignore

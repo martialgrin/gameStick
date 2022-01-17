@@ -26,9 +26,10 @@ export default class Grid {
 
     this.scale = [];
     this.cells = [];
+    this.gridExplode = false;
 
     this.mult = 4;
-    this.firstRead = true;
+    // this.firstRead = true;
 
     //this.container = new PIXI.Container();
 
@@ -84,13 +85,10 @@ export default class Grid {
 
     // Listen for animate update
     //this.app.ticker.add(this.draw.bind(this));
-    if (this.firstRead == true) {
-      this.mouseDown();
-      this.firstRead = false;
-    }
   }
 
   draw(ctx) {
+    this.explode();
     this.analysedCanvas = ctx;
     const { cells } = this;
     let i = cells.length;
@@ -172,14 +170,19 @@ export default class Grid {
     return [r, g, b];
   }
 
-  mouseDown() {
-    const { cells } = this;
-    document.addEventListener("click", function () {
-      let i = cells.length;
-      for (; i--; ) {
-        const child = cells[i];
-        child.setPos();
+  explode() {
+    if (!this.gridExplode) {
+      if (PARAMS.loader.explode) {
+        this.gridExplode = true;
+
+        console.log("explode");
+        const { cells } = this;
+        let i = cells.length;
+        for (; i--; ) {
+          const child = cells[i];
+          child.setPos();
+        }
       }
-    });
+    }
   }
 }

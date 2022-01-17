@@ -26,12 +26,6 @@ class Loader {
   init() {
     this.minDuration();
     this.animationLoading();
-    document.addEventListener("click", this.transitionClick.bind(this));
-  }
-
-  transitionClick() {
-    console.log("click");
-    PARAMS.loader.loop = false;
   }
 
   minDuration() {
@@ -73,7 +67,7 @@ class Loader {
     return 0.5 * (1 + Math.sin(2 * pi * frequency * time));
   }
   transitionOnEnd() {
-    this.radius = lerp(this.radius, 0, 0.01);
+    this.radius = lerp(this.radius, 0, 0.05);
   }
 
   onEndLoader() {
@@ -82,7 +76,7 @@ class Loader {
     }
     this.drawCanvas();
     this.r = this.pulse(this.count * this.loaderElem.speed) * 100 + this.radius;
-    if (this.r > 10) {
+    if (this.r > 20) {
       requestAnimationFrame(this.onEndLoader.bind(this));
     } else {
       this.endLoader();
@@ -90,6 +84,7 @@ class Loader {
   }
 
   endLoader() {
+    PARAMS.loader.explode = true;
     console.log("endLoader");
     let elem = document.getElementById(PARAMS.loader.id);
     elem.remove();
