@@ -1,3 +1,4 @@
+import { endLoader } from "../Loading/loader";
 import PARAMS from "../PARAMS";
 import protoype from "./Prototyping/index";
 
@@ -9,17 +10,15 @@ const LoadModel = (canvasApp) => {
 
 const modelLoaded = (canvasApp) => {
   const Game = canvasApp;
+  console.log("ML5 Model is Loaded");
+  PARAMS.loader.loop = false;
   poseNet.on("pose", (results) => {
     if (results.length > 0) {
       let pos = results[0].pose.keypoints;
       if (PARAMS.dev.state) {
         protoype(pos);
       }
-      // for (let i = 0; i < pos.length; i++) {
-      //   pos[i].position = normalizeValue(pos[i].position);
-      // }
       PARAMS.poseNet.someoneIsFront = true;
-      // POSES.key = results[0].pose.keypoints;
       Game.getData(pos);
       PARAMS.poseNet.isLoaded = true;
     } else {

@@ -7,15 +7,14 @@ import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
 import calcAngles from "../PositionCalcs/calcAngles";
 import { animationInTarget } from "./animationTarget";
 import Grid from "./Visual/Grid";
-import StartAnimation from "./Introduction/StartAnimation";
 import AnalyzePixels from "./Visual/AnalyzePixels";
 
 class App {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
     this.pixelDensity = PARAMS.canvas.pixelRatio;
-    this.canvas.width = this.w = window.innerWidth * this.pixelDensity;
-    this.canvas.height = this.h = window.innerHeight * this.pixelDensity;
+    this.canvas.width = this.w = 720;
+    this.canvas.height = this.h = 1280;
     PARAMS.canvas.width = this.w;
     PARAMS.canvas.height = this.h;
     this.canvas.style.width = this.w / this.pixelDensity + "px";
@@ -36,12 +35,7 @@ class App {
     this.Stick = new DrawStick(this.ctx, this.level);
     this.Target = new DrawStick(this.ctx, this.level);
     this.Grid = new Grid();
-    this.StartAnimation = new StartAnimation(
-      this.ctx,
-      this.w,
-      this.h,
-      this.Stick
-    );
+
     this.checkIfModelIsLoaded();
   }
   loadBasicParamsForSketch() {
@@ -94,7 +88,6 @@ class App {
     this.processAngles();
     this.lineWidth = 300;
     if (this.lineLength < 0.32) {
-      this.lineLength = this.StartAnimation.setLineLength(this.lineLength);
       this.Stick.setLineLength(this.lineLength);
     }
     this.checkLevel();

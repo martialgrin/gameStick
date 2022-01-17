@@ -7,7 +7,14 @@ const PARAMS = {
     state: 1, // introduction = 0, game = 1 etc.
     initialLevel: 1,
   },
-
+  loader: {
+    loop: true,
+    loopEnd: false,
+    id: "loader",
+    speed: 1,
+    size: 100,
+    minDuration: 4000, //in ms
+  },
   grid: {
     // 715 x 971 px
     columns: 25,

@@ -18,8 +18,8 @@ export default class Grid {
     this.canvas = document.createElement("canvas");
     this.analysedCanvas = PARAMS.canvas.ctx;
 
-    this.canvas.width = PARAMS.canvas.width / 3;
-    this.canvas.height = PARAMS.canvas.height / 3;
+    this.canvas.width = PARAMS.canvas.width;
+    this.canvas.height = PARAMS.canvas.height;
 
     this.ctx = this.canvas.getContext("2d");
 
