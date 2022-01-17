@@ -19,8 +19,8 @@ class Points {
     this.smoothColor = 0xcccccc;
     this.color = 0xffffff;
     this.stepPos = {
-      x: 0.06 + Math.random() * 0.05,
-      y: 0.1 + Math.random() * 0.08,
+      x: 0.03 + Math.random() * 0.15,
+      y: 0.05 + Math.random() * 0.2,
     };
   }
 

@@ -62,16 +62,7 @@ class App {
     le modèle de PosNet est starté
     *********************************/
     if (PARAMS.poseNet.isLoaded) {
-      // Start Animation Begin
       this.initListeners();
-      // if (PARAMS.dev.state == true && this.stateApplication != 0) {
-      //   this.draw();
-      // } else {
-      //   this.lineLength = 0;
-      //   this.level = 0;
-      //   this.StartAnimation.start();
-      //   this.intro();
-      // }
       this.draw();
     } else {
       requestAnimationFrame(this.checkIfModelIsLoaded.bind(this));

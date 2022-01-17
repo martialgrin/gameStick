@@ -9,7 +9,7 @@ const PARAMS = {
   },
   game: {
     state: 1, // introduction = 0, game = 1 etc.
-    initialLevel: 1,
+    initialLevel: 2,
   },
   loader: {
     loop: true,
@@ -29,7 +29,7 @@ const PARAMS = {
     lineWidth: 15,
   },
   targetStick: {
-    lineWidth: 10, // to add from the stick lineWidth
+    lineWidth: 15, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",

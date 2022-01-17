@@ -67,7 +67,7 @@ class Loader {
     return 0.5 * (1 + Math.sin(2 * pi * frequency * time));
   }
   transitionOnEnd() {
-    this.r = lerp(this.r, 0, 0.08);
+    this.r = lerp(this.r, 0, 0.1);
   }
 
   //   onEndLoader() {
