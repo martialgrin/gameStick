@@ -1,5 +1,6 @@
 import { lerp } from "three/src/math/MathUtils";
 import PARAMS from "../PARAMS";
+import { lerpHex } from "../Utils";
 
 let count = 0;
 
@@ -17,6 +18,9 @@ class Loader {
     this.canvas.setAttribute("id", PARAMS.loader.id);
     document.body.appendChild(this.canvas);
     this.loaderElem = PARAMS.loader;
+    this.fillColor = PARAMS.colorScheme.opt1.c1;
+    this.endFillColor = PARAMS.colorScheme.opt1.c3;
+
     this.radius = this.loaderElem.size;
 
     this.minSizeGrid = this.w / PARAMS.grid.columns;
@@ -24,6 +28,8 @@ class Loader {
     this.init();
   }
   init() {
+    this.fillColor = lerpHex(this.fillColor, this.endFillColor, 0.01);
+
     this.minDuration();
     this.animationLoading();
   }
@@ -52,10 +58,11 @@ class Loader {
 
   drawCanvas() {
     this.count += 1;
-
+    this.fillColor = lerpHex(this.fillColor, this.endFillColor, 0.01);
+    // console.log(this.fillColor.toString(16));
     this.ctx.clearRect(0, 0, this.w, this.h);
     this.ctx.beginPath();
-    this.ctx.fillStyle = "#aa00dd";
+    this.ctx.fillStyle = "#" + this.fillColor.toString(16);
     this.ctx.arc(this.w / 2, this.h / 2, this.r, 0, Math.PI * 2);
     this.ctx.fill();
     this.ctx.closePath();

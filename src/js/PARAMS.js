@@ -29,7 +29,7 @@ const PARAMS = {
     lineWidth: 15,
   },
   targetStick: {
-    lineWidth: 15, // to add from the stick lineWidth
+    lineWidth: 25, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",

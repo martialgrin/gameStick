@@ -8,7 +8,7 @@ const animationInTarget = (target) => {
   target.lineWidth = elastic(
     target.isInsideCount,
     target.baseLineWidth,
-    4000,
+    300,
     100
   );
   return target;
