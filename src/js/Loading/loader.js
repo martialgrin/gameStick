@@ -18,8 +18,8 @@ class Loader {
     this.canvas.setAttribute("id", PARAMS.loader.id);
     document.body.appendChild(this.canvas);
     this.loaderElem = PARAMS.loader;
-    this.fillColor = PARAMS.colorScheme.opt1.c1;
-    this.endFillColor = PARAMS.colorScheme.opt1.c3;
+    this.fillColor = PARAMS.colorScheme.opt1.purple;
+    this.endFillColor = PARAMS.colorScheme.opt1.grey;
 
     this.radius = this.loaderElem.size;
 

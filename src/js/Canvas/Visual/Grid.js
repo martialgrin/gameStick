@@ -10,7 +10,6 @@ import { easeInBack } from "js-easing-functions";
 
 const RADIUS = 0.5;
 const RGB_DIV255 = 1 / 255;
-const DIV3 = 1 / 3;
 const OFFSET_Y = Math.sqrt((RADIUS * 2) ** 2 - RADIUS ** 2);
 
 export default class Grid {
@@ -29,10 +28,6 @@ export default class Grid {
     this.gridExplode = false;
 
     this.mult = 4;
-    // this.firstRead = true;
-
-    //this.container = new PIXI.Container();
-
     this.setup();
   }
 
@@ -71,18 +66,13 @@ export default class Grid {
         this.container.addChild(ellipse.graphics);
       }
     }
-
     // Move container to the center
     this.container.x = this.canvas.width / 6;
     this.container.y = this.canvas.height / 6;
-
     // Center sprite in local container coordinates
     this.container.pivot.x = PARAMS.grid.columns / 2 + 0.25;
     this.container.pivot.y = PARAMS.grid.rows / 2;
     this.container.scale.set(this.canvas.width / (PARAMS.grid.columns - 2) / 3);
-
-    // Listen for animate update
-    //this.app.ticker.add(this.draw.bind(this));
   }
 
   draw(ctx) {
@@ -96,50 +86,30 @@ export default class Grid {
       const child = cells[i];
       const color = this.getPixelHexColor(child.column, child.row, pixels);
       const [r, g, b] = color;
-      //let luminosity = (r + g + b) * DIV3;
-      //luminosity = map(luminosity ** 0.5, 0, 1, 1, 0.2);
 
-      //? si pas de corp
-      if (color[1] != 1) {
-        //! gris
-        child.setColor(PARAMS.colorScheme.opt1.c3);
-      }
-      //? si corp
-      else if (color[1] == 1) {
+      if (color[1] == 1) {
         //! cyan
-        child.setColor(PARAMS.colorScheme.opt1.c2);
-      } else {
+        child.setColor(PARAMS.colorScheme.opt1.cyan);
+        child.setScale(0.6 / this.mult);
+        if (color[0] == 1) {
+          child.setScale(1 / this.mult);
+        }
+      } else if (color[0] == 1) {
         //! violet
-        child.setColor(PARAMS.colorScheme.opt1.c3);
-      }
-      if (color[0] == 1 && color[1] != 1) {
-        //! gris
-        child.setColor(PARAMS.colorScheme.opt1.c1);
-      }
-      if (color[2] == 1) {
+        child.setColor(PARAMS.colorScheme.opt1.purple);
+        if (color[1] == 1) {
+          child.setScale(1 / this.mult);
+        } else {
+          child.setScale(0.6 / this.mult);
+        }
+      } else if (color[2] == 1) {
         //! gris cyan
-        child.setColor(PARAMS.colorScheme.opt1.c4);
-        child.setScale(0.6 / this.mult);
-      }
-
-      //? si recherche et corp
-      if (color[0] == 1 && color[1] == 1) {
-        child.setScale(1 / this.mult);
-      }
-      //? si recherche
-      else if (color[0] == 1) {
-        child.setScale(0.6 / this.mult);
-      }
-      //? si corp mais pas recherche
-      else if (color[1] == 1 && color[0] != 1) {
-        child.setScale(0.6 / this.mult);
-      } else {
-        child.setScale(0.3 / this.mult);
-      }
-
-      if (color[2] == 1) {
-        child.setColor(PARAMS.colorScheme.opt1.c4);
+        child.setColor(PARAMS.colorScheme.opt1.greyCyan);
         child.setScale(0.45 / this.mult);
+      } else {
+        //! gris
+        child.setColor(PARAMS.colorScheme.opt1.grey);
+        child.setScale(0.3 / this.mult);
       }
 
       child.update();

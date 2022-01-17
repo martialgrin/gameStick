@@ -39,7 +39,7 @@ class App {
     this.PostTarget = new DrawStick(this.ctx, LEVELS.length - 1);
 
     //! REPLACE GRID
-    //this.Grid = new Grid();
+    this.Grid = new Grid();
 
     this.checkIfModelIsLoaded();
   }
@@ -81,9 +81,9 @@ class App {
     /*********************************
     Call all Main Functions  
     *********************************/
-    if (PARAMS.dev.state != true) {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = "#000";
+
     this.ctx.globalCompositeOperation = "normal";
 
     this.drawTargetPost();
@@ -117,7 +117,7 @@ class App {
     // this.drawTargetWhite();
     this.ctx.globalCompositeOperation = "screen";
     //! REPLACE GRID
-    //this.Grid.draw(this.ctx);
+    this.Grid.draw(this.ctx);
     requestAnimationFrame(this.draw.bind(this));
   }
   // You Have to make change here for the check level
