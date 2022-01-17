@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: true,
+    videoStream: false,
   },
   game: {
     state: 1, // introduction = 0, game = 1 etc.

@@ -62,8 +62,6 @@ export default class Grid {
           radius: 0.5 * this.mult,
           scale: 1,
           scale: 1,
-          width: this.app.width,
-          height: this.app.height,
         });
         ellipse.generate();
 
