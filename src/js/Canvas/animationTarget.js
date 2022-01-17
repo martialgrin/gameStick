@@ -14,7 +14,20 @@ const animationInTarget = (target) => {
   return target;
 };
 
-const animationOutTarget = () => {
+const animationOutTarget = (target) => {
+  target.isInside = false;
+
+  if (target.isInsideCount >= 0) {
+    target.isInsideCount--;
+  }
+  target.lineWidth = elastic(
+    target.isInsideCount,
+    target.baseLineWidth,
+    300,
+    100
+  );
+
+  return target;
   /****************************************
   Code when you go out of the target
   ***************************************/

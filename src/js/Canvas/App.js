@@ -5,7 +5,7 @@ import checkPartAndTarget from "../levelLogic/checkPartAndTarget";
 import DrawStick from "./DrawStick";
 import calcPosStickyStartPoint from "../PositionCalcs/calcPosStickyStartPoint";
 import calcAngles from "../PositionCalcs/calcAngles";
-import { animationInTarget } from "./animationTarget";
+import { animationInTarget, animationOutTarget } from "./animationTarget";
 import Grid from "./Visual/Grid";
 import AnalyzePixels from "./Visual/AnalyzePixels";
 
@@ -36,7 +36,9 @@ class App {
     this.loadBasicParamsForSketch();
     this.Stick = new DrawStick(this.ctx, this.level);
     this.Target = new DrawStick(this.ctx, this.level);
-    this.Grid = new Grid();
+    this.PostTarget = new DrawStick(this.ctx, LEVELS.length - 1);
+
+    // this.Grid = new Grid();
 
     this.checkIfModelIsLoaded();
   }
@@ -74,20 +76,6 @@ class App {
     );
     this.arrayElements = calcAngles(this.ElementsParts);
   }
-  intro() {
-    if (PARAMS.dev.state != true) {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-    this.processAngles();
-    this.lineWidth = 100;
-    if (this.lineLength < 0.32) {
-      this.Stick.setLineLength(this.lineLength);
-    }
-    this.checkLevel();
-    this.drawTarget();
-    this.drawStick();
-    requestAnimationFrame(this.intro.bind(this));
-  }
   draw() {
     /*********************************
     Call all Main Functions  
@@ -95,7 +83,12 @@ class App {
     if (PARAMS.dev.state != true) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+    this.ctx.globalCompositeOperation = "normal";
+
+    // this.drawTargetPost();
+
     this.ctx.globalCompositeOperation = "screen";
+
     this.drawTarget();
     this.processAngles();
     this.checkLevel();
@@ -121,10 +114,9 @@ class App {
     // this.ctx.fill();
     // this.ctx.closePath();
 
-    // this.drawTargetPost();
     // this.drawTargetWhite();
     this.ctx.globalCompositeOperation = "screen";
-    this.Grid.draw(this.ctx);
+    // this.Grid.draw(this.ctx);
     //this.Grid.getArray(counter);
     requestAnimationFrame(this.draw.bind(this));
   }
@@ -138,23 +130,13 @@ class App {
       LEVELS[this.level].targetsAngle,
       this.level
     );
-
     if (this.PartsInsideTarget) {
       this.target = animationInTarget(this.target);
-      if (this.target.isInsideCount == 80) {
+      if (this.target.isInsideCount >= 80) {
         this.selectLevel(this.level + 1);
       }
-      console.log("is Inside");
-    } else {
-      if (this.target.isInside) {
-        this.target.maxLineWidth = 0;
-        this.target.isInside = false;
-        this.target.isInsideCount = 0;
-      }
-      if (this.target.lineWidth > this.target.baseLineWidth) {
-        this.target.isOutsideCount += 2;
-        this.target.lineWidth -= 50;
-      }
+    } else if (this.target.isInsideCount >= 0) {
+      this.target = animationOutTarget(this.target);
     }
   }
   drawTarget() {
@@ -173,12 +155,13 @@ class App {
   drawTargetPost() {
     this.ctx.save();
     this.ctx.beginPath();
-    this.Target.draw(
-      LEVELS[this.level].targetsAngle,
-      LEVELS[this.level].startXPosTarget
+    // console.log(LEVELS[LEVELS.length - 1]);
+    this.PostTarget.draw(
+      LEVELS[LEVELS.length - 1].targetsAngle,
+      LEVELS[LEVELS.length - 1].startXPosTarget
     );
     this.ctx.lineWidth = this.target.lineWidth;
-    this.ctx.strokeStyle = PARAMS.colorScheme.opt1.c3;
+    this.ctx.strokeStyle = "#0000ff";
     this.ctx.stroke();
     this.ctx.closePath();
     this.ctx.restore();
@@ -229,6 +212,20 @@ class App {
   initListeners() {
     document.addEventListener("keyup", this.selectLevel.bind(this));
   }
+  // intro() {
+  //   if (PARAMS.dev.state != true) {
+  //     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  //   }
+  //   this.processAngles();
+  //   this.lineWidth = 100;
+  //   if (this.lineLength < 0.32) {
+  //     this.Stick.setLineLength(this.lineLength);
+  //   }
+  //   this.checkLevel();
+  //   this.drawTarget();
+  //   this.drawStick();
+  //   requestAnimationFrame(this.intro.bind(this));
+  // }
 }
 
 export default App;
