@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: true,
+    videoStream: false,
   },
   window: {
     width: 720,
