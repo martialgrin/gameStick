@@ -118,7 +118,7 @@ class DrawStick {
     this.ctx.translate(0, -0.25 * this.width);
     this.ctx.moveTo(0, 0);
     this.ctx.lineWidth = 0;
-    this.ctx.arc(0, 0, 60, 0, Math.PI * 2);
+    this.ctx.arc(0, 0, 20, 0, Math.PI * 2);
     this.ctx.restore();
   }
   restorePath() {

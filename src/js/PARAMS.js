@@ -3,6 +3,10 @@ const PARAMS = {
     state: true, //all Tools for Developement
     videoStream: true,
   },
+  window: {
+    width: 720,
+    height: 1280,
+  },
   game: {
     state: 1, // introduction = 0, game = 1 etc.
     initialLevel: 1,
@@ -18,13 +22,13 @@ const PARAMS = {
   grid: {
     // 715 x 971 px
     columns: 25,
-    rows: 42,
+    rows: 55,
   },
   stick: {
-    lineWidth: 150,
+    lineWidth: 40,
   },
   targetStick: {
-    lineWidth: 100, // to add from the stick lineWidth
+    lineWidth: 25, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
@@ -33,6 +37,7 @@ const PARAMS = {
     width: null, // if Null define a width as window.innerWidth
     height: null, // if Null define a width as window.innerHeight
     pixelRatio: 3,
+    divisionResolution: 4,
   },
   video: {
     width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas

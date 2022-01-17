@@ -13,12 +13,14 @@ class App {
   constructor() {
     this.canvas = PARAMS.canvas.obj;
     this.pixelDensity = PARAMS.canvas.pixelRatio;
-    this.canvas.width = this.w = 720;
-    this.canvas.height = this.h = 1280;
+    this.canvas.width = this.w =
+      PARAMS.window.width / PARAMS.canvas.divisionResolution;
+    this.canvas.height = this.h =
+      PARAMS.window.height / PARAMS.canvas.divisionResolution;
     PARAMS.canvas.width = this.w;
     PARAMS.canvas.height = this.h;
-    this.canvas.style.width = this.w / this.pixelDensity + "px";
-    this.canvas.style.height = this.h / this.pixelDensity + "px";
+    // this.canvas.style.width = this.w "px";
+    // this.canvas.style.height = this.h "px";
     this.ctx = PARAMS.canvas.ctx;
     this.ElementsParts = [];
     this.posXSitckyPoint = 0;
@@ -86,7 +88,7 @@ class App {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     this.processAngles();
-    this.lineWidth = 300;
+    this.lineWidth = 100;
     if (this.lineLength < 0.32) {
       this.Stick.setLineLength(this.lineLength);
     }
@@ -108,13 +110,13 @@ class App {
     this.checkLevel();
     this.drawStick();
 
-    //! debug
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = "#0000ff";
-    this.ctx.arc(this.w / 2, 500, 100, 0, Math.PI * 2);
-    this.ctx.stroke();
-    this.ctx.lineWidth = this.lineWidth;
-    this.ctx.closePath();
+    // //! debug
+    // this.ctx.beginPath();
+    // this.ctx.strokeStyle = "#0000ff";
+    // this.ctx.arc(this.w / 2, 500, 100, 0, Math.PI * 2);
+    // this.ctx.stroke();
+    // this.ctx.lineWidth = this.lineWidth;
+    // this.ctx.closePath();
     //! debug
 
     /*********************************

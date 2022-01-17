@@ -6,7 +6,7 @@ const protoype = (points) => {
   if (PARAMS.poseNet.someoneIsFront) {
     const keypoints = points;
     const data = [];
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "black";
 
     keypoints.forEach((point) => {
       const x = point.position.x * window.devicePixelRatio;
