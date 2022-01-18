@@ -132,9 +132,10 @@ class App {
     );
     if (this.PartsInsideTarget) {
       this.target = animationInTarget(this.target);
-      if (this.target.isInsideCount >= 80) {
+      if (this.target.isInsideCount >= 60) {
         this.selectLevel(this.level + 1);
       }
+      console.log(this.target.isInsideCount);
     } else if (this.target.isInsideCount >= 0) {
       this.target = animationOutTarget(this.target);
     }

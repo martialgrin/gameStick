@@ -6,6 +6,7 @@ class Points {
   constructor({ radius, scale, x, y, column, row }) {
     this.x = ~~PARAMS.grid.columns / 2 + 0.3;
     this.y = ~~PARAMS.grid.rows / 2 + 0.3;
+
     this.newX = x;
     this.newY = y;
     this.column = column;
@@ -37,8 +38,8 @@ class Points {
   }
 
   update() {
-    this.smoothScale = lerp(this.smoothScale, this.scale, 0.2);
-    this.smoothColor = lerpHex(this.smoothColor, this.color, 0.2);
+    this.smoothScale = lerp(this.smoothScale, this.scale, 0.15);
+    this.smoothColor = lerpHex(this.smoothColor, this.color, 0.15);
     // prettier-ignore
     this.smoothPosX = lerp(this.smoothPosX,this.x, this.stepPos.x);
     // prettier-ignore
@@ -60,6 +61,16 @@ class Points {
 
   setScale(newScale) {
     this.scale = newScale;
+  }
+
+  setPosTrans(newY, isTarget) {
+    if (this.newY + newY <= this.y && isTarget) {
+      this.y += newY;
+      this.graphics.z = 2;
+    } else if (!isTarget) {
+      this.y = this.newY;
+      this.graphics.z = 0;
+    }
   }
 
   setPos() {

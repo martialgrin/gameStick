@@ -18,17 +18,16 @@ class Loader {
     this.canvas.setAttribute("id", PARAMS.loader.id);
     document.body.appendChild(this.canvas);
     this.loaderElem = PARAMS.loader;
-    this.fillColor = PARAMS.colorScheme.opt1.purple;
-    this.endFillColor = PARAMS.colorScheme.opt1.grey;
-
+    this.fillColor = PARAMS.colorScheme.opt1.cyan;
+    this.endFillColor = PARAMS.colorScheme.opt1.purple;
     this.radius = this.loaderElem.size;
-
     this.minSizeGrid = this.w / PARAMS.grid.columns;
 
     this.init();
   }
   init() {
     this.fillColor = lerpHex(this.fillColor, this.endFillColor, 0.01);
+    this.ctx.fillStyle = "#aa00dd";
 
     this.minDuration();
     this.animationLoading();

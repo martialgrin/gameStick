@@ -2,7 +2,6 @@ import PARAMS from "../../PARAMS";
 import { lerp, map } from "../../Utils";
 import * as PIXI from "pixi.js";
 import Points from "./Points";
-import { easeInBack } from "js-easing-functions";
 
 /*********************
  Draw Sketch of Grid 
@@ -16,7 +15,6 @@ export default class Grid {
   constructor() {
     this.canvas = document.createElement("canvas");
     this.analysedCanvas = PARAMS.canvas.ctx;
-
     this.canvas.width = PARAMS.canvas.width * PARAMS.canvas.divisionResolution;
     this.canvas.height =
       PARAMS.canvas.height * PARAMS.canvas.divisionResolution;
@@ -89,12 +87,18 @@ export default class Grid {
 
       if (color[1] == 1) {
         //! cyan
+        if (this.gridExplode) {
+          child.setPosTrans(-0.1, true);
+        }
         child.setColor(PARAMS.colorScheme.opt1.cyan);
         child.setScale(0.6 / this.mult);
         if (color[0] == 1) {
           child.setScale(1 / this.mult);
         }
       } else if (color[0] == 1) {
+        if (this.gridExplode) {
+          child.setPosTrans(-0.2, false);
+        }
         //! violet
         child.setColor(PARAMS.colorScheme.opt1.purple);
         if (color[1] == 1) {
@@ -103,10 +107,16 @@ export default class Grid {
           child.setScale(0.6 / this.mult);
         }
       } else if (color[2] == 1) {
+        if (this.gridExplode) {
+          child.setPosTrans(-0.2, false);
+        }
         //! gris cyan
         child.setColor(PARAMS.colorScheme.opt1.greyCyan);
         child.setScale(0.45 / this.mult);
       } else {
+        if (this.gridExplode) {
+          child.setPosTrans(-0.2, false);
+        }
         //! gris
         child.setColor(PARAMS.colorScheme.opt1.grey);
         child.setScale(0.3 / this.mult);
