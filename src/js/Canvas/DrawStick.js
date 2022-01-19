@@ -12,7 +12,7 @@ class DrawStick {
     this.countIntro = 0;
     this.angles = [];
     this.level = level;
-    this.lineLength = 0.3;
+    this.lineLength = 0.4;
     this.pathLevel = LEVELS[this.level].path;
     this.c = "#00ff00";
   }
@@ -27,7 +27,12 @@ class DrawStick {
 
   // from Drawstick with
   draw(angles, startPosX) {
-    if (this.level == 0) {
+    if (
+      this.level == 0 ||
+      this.level == 1 ||
+      this.level == 2 ||
+      this.level == 3
+    ) {
       this.countIntro += 0.001;
       this.angles = angles;
       this.drawStartingPoint(startPosX);
@@ -36,9 +41,9 @@ class DrawStick {
         if (i == 0) {
           this.drawLine(this.angles[i], 0);
         } else {
-          if (i == 3) {
-            this.drawHead();
-          }
+          // if (i == 3) {
+          //   this.drawHead();
+          // }
           if (this.pathLevel[i] == 0) {
             this.drawLineIntro(this.angles[i], this.angles[i - 1]);
           } else if (this.pathLevel[i] == 1) {

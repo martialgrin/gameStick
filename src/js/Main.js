@@ -9,7 +9,7 @@ import Loader from "./Loading/loader";
 const stats = new Stats();
 
 const Main = () => {
-  if (PARAMS.dev.state) {
+  if (!PARAMS.dev.state) {
     stats.showPanel(0);
     document.body.appendChild(stats.dom);
     statsViewer();

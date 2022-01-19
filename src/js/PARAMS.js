@@ -1,7 +1,7 @@
 const PARAMS = {
   dev: {
     state: true, //all Tools for Developement
-    videoStream: true,
+    videoStream: false,
   },
   window: {
     width: 720,
@@ -9,7 +9,7 @@ const PARAMS = {
   },
   game: {
     state: 1, // introduction = 0, game = 1 etc.
-    initialLevel: 2,
+    initialLevel: 1,
   },
   loader: {
     loop: true,
@@ -29,7 +29,7 @@ const PARAMS = {
     lineWidth: 20,
   },
   targetStick: {
-    lineWidth: 20, // to add from the stick lineWidth
+    lineWidth: 15, // to add from the stick lineWidth
   },
   canvas: {
     id: "main-container",
@@ -41,8 +41,8 @@ const PARAMS = {
     divisionResolution: 6,
   },
   video: {
-    width: 135, //270-Screen MID - 0 for window width - it will be the same size for the canvas
-    height: 240, //480-Screen MID - 0 for window height - it will be the same size for the canvas
+    width: 270, //270-Screen MID - 0 for window width - it will be the same size for the canvas
+    height: 480, //480-Screen MID - 0 for window height - it will be the same size for the canvas
     videoIsReady: false,
     obj: null,
   },

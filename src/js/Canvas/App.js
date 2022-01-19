@@ -132,7 +132,7 @@ class App {
     );
     if (this.PartsInsideTarget) {
       this.target = animationInTarget(this.target);
-      if (this.target.isInsideCount >= 60) {
+      if (this.target.isInsideCount >= 120) {
         this.selectLevel(this.level + 1);
       }
       console.log(this.target.isInsideCount);
@@ -194,16 +194,35 @@ class App {
     *********************************/
     this.ElementsParts = preProcessArrayParts(datas, this.level);
   }
+  startEndTrans() {
+    this.Grid.finish(true);
+  }
   selectLevel(e) {
     // if (PARAMS.dev.state) {
     if (e.code == "Digit" + e.key) {
-      this.level = e.key - 1;
-      this.loadBasicParamsForSketch();
+      console.log(e.key);
+      if (e.key == LEVELS.length + 1) {
+        this.startEndTrans();
+      } else {
+        this.level = e.key - 1;
+        this.loadBasicParamsForSketch();
+      }
     }
+
     // }
     if (typeof e == "number") {
-      this.level = e;
-      this.loadBasicParamsForSketch();
+      if (e == LEVELS.length) {
+        console.log("end");
+        this.startEndTrans();
+        setTimeout(() => {
+          this.Grid.finish(false);
+          this.level = 0;
+        }, 3000);
+        // this.level = 0;
+      } else {
+        this.level = e;
+        this.loadBasicParamsForSketch();
+      }
     }
     //To change the path level
     this.Stick.chooseLevel(this.level);

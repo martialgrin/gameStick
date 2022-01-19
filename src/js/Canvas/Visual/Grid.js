@@ -20,10 +20,11 @@ export default class Grid {
       PARAMS.canvas.height * PARAMS.canvas.divisionResolution;
 
     this.ctx = this.canvas.getContext("2d");
-
+    this.finishState = false;
     this.scale = [];
     this.cells = [];
     this.gridExplode = false;
+    this.scaleFinish = 1.2;
 
     this.mult = 4;
     this.setup();
@@ -34,7 +35,7 @@ export default class Grid {
       width: this.canvas.width,
       height: this.canvas.height,
       backgroundColor: PARAMS.colorScheme.opt1.bg,
-      resolution: PARAMS.canvas.pixelRatio,
+      resolution: 4,
       antialias: true,
     });
     document.body.appendChild(this.app.view);
@@ -65,12 +66,12 @@ export default class Grid {
       }
     }
     // Move container to the center
-    this.container.x = this.canvas.width / 6;
-    this.container.y = this.canvas.height / 6;
+    this.container.x = this.canvas.width / 8;
+    this.container.y = this.canvas.height / 8;
     // Center sprite in local container coordinates
     this.container.pivot.x = PARAMS.grid.columns / 2 + 0.25;
     this.container.pivot.y = PARAMS.grid.rows / 2;
-    this.container.scale.set(this.canvas.width / (PARAMS.grid.columns - 2) / 3);
+    this.container.scale.set(this.canvas.width / (PARAMS.grid.columns - 2) / 4);
   }
 
   draw(ctx) {
@@ -85,6 +86,10 @@ export default class Grid {
       const color = this.getPixelHexColor(child.column, child.row, pixels);
       const [r, g, b] = color;
 
+      if (this.finishState == true) {
+        child.setScale(this.scaleFinish / this.mult);
+      }
+
       if (color[1] == 1) {
         //! cyan
         if (this.gridExplode) {
@@ -94,6 +99,9 @@ export default class Grid {
         child.setScale(0.6 / this.mult);
         if (color[0] == 1) {
           child.setScale(1 / this.mult);
+          if (this.finishState == true) {
+            child.setScale(this.scaleFinish / this.mult);
+          }
         }
       } else if (color[0] == 1) {
         if (this.gridExplode) {
@@ -103,6 +111,9 @@ export default class Grid {
         child.setColor(PARAMS.colorScheme.opt1.purple);
         if (color[1] == 1) {
           child.setScale(1 / this.mult);
+          if (this.finishState == true) {
+            child.setScale(this.scaleFinish / this.mult);
+          }
         } else {
           child.setScale(0.6 / this.mult);
         }
@@ -146,6 +157,15 @@ export default class Grid {
     const b = pixelData[i + 2] * RGB_DIV255;
 
     return [r, g, b];
+  }
+  finish(e) {
+    this.finishState = e;
+    // const { cells } = this;
+    // let i = cells.length;
+    // for (; i--; ) {
+    //   const child = cells[i];
+    //   child.setScale(2 / this.mult);
+    // }
   }
 
   explode() {
